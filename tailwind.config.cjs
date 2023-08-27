@@ -1,5 +1,4 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -16,6 +15,10 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    node: {
+      global: true, // this is the key!
+      // ... other node options
     },
     extend: {
       colors: {
@@ -61,6 +64,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        mont: ['"Mont"', ...fontFamily.sans], // Added Mont
+        raleway: ['"Raleway"', ...fontFamily.sans], // Added Raleway
       },
       keyframes: {
         "accordion-down": {
@@ -79,6 +84,24 @@ module.exports = {
     },
   },
   plugins: [
+    function ({ addBase }) {
+      addBase({
+        '@font-face': {
+          fontFamily: 'Mont',
+          fontWeight: '800',
+          fontStyle: 'normal',
+          fontDisplay: 'swap', 
+          src: `url('/public/Mont.ttf') format('truetype')`, // Path to your Mont font
+        },
+        '@font-face': {
+          fontFamily: 'Raleway',
+          fontWeight: '800',
+          fontStyle: 'normal',
+          fontDisplay: 'swap',
+          src: `url('/public/Raleway.ttf') format('truetype')`, // Path to your Raleway font
+        }
+      })
+    },
     require("tailwindcss-animate"),
     require("tw-elements/dist/plugin.cjs"),
   ],
