@@ -39,93 +39,87 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-// import { PointsUpdateDialog } from "./PointsUpdate"
+import TimeComponent from "./Event/EditTimeFormat"
+import { EventsEditForm, EventDataProps } from "./Event/EventEdit"
 
 
-export const columns: ColumnDef<Event>[] = [
-    {
-        accessorKey: "event_name",
-        header: ({ column }) => (
-            <Button
-                className="w-full text-right"
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-            >
-                Event Name
-                <CaretSortIcon className="ml-2 h-4 w-4" />
-            </Button>
-        ),
-        cell: ({ row }) => <div className="uppercase text-center">{row.getValue("event_name")}</div>,
-    },
-    {
-        accessorKey: "society_name",
-        header: "Society Name",
 
-        cell: ({ row }) => <div className=" w-full text-left">{row.getValue("society_name")}</div>,
-    },
-    {
-        accessorKey: "day_number",
-        header: "Day Number",
-        cell: ({ row }) => <div className="text-center -mr-10  -ml-20  ">{row.getValue("day_number")}</div>,
-    },
-    {
-        accessorKey: "venue",
-        header: "Venue",
-        cell: ({ row }) => <div className="text-center md:-ml-10 ">{row.getValue("venue")}</div>,
-    },
-    {
-        accessorKey: "time",
-        header: "Time",
-        cell: ({ row }) => <div className="flex  items-center md:-ml-10 justify-center ">{row.getValue("time")}</div>,
-    },
-    {
-        accessorKey: "event_id",
-        enableHiding: false,
-        header: "Edit",
-        cell: ({ row }) => 
-        <div className="flex  items-center md:-ml-10 justify-center "> 
-        <EventDeleteDialogBox eventId={row.getValue("event_id")} />
-        <Button variant="ghost" className="h-8 ml-4 w-8 p-0">
-            <LucideMoreHorizontal className="h-5  w-5" />
-        </Button> 
-        </div>,
-    },
-
-
-    // {
-    //     id: "actions",
-    //     enableHiding: false,
-    //     cell: ({ row }) => (
-    //         <Button variant="ghost" className="h-8 ml-2 w-8 p-0">
-    //         <LucideMoreHorizontal className="h-5  w-5" />
-    //         </Button>
-    //     ),
-    // },
-];
 
 export function AdminEventsTable() {
     // State to hold the events data
     const [eventsData, setEventsData] = useState<Event[]>([]);
-
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/events');
+    // Fetch events data function
+    const fetchEventsData = () => {
+        axios.get('http://localhost:3000/events')
+            .then(response => {
                 setEventsData(response.data);
                 console.log(response.data);
-            } catch (error) {
-                console.error("Error fetching events:", error);
-            }
-        };
+            })
+            .catch(error => {
+                console.error('Error fetching events:', error);
+            });
+    };
 
-        fetchEvents();
-    }, []); // The empty dependency array ensures that this useEffect only runs once when the component mounts.
+    // Fetch data using Axios when the component mounts
+    React.useEffect(fetchEventsData, []); // calling fetchEventsData directly in useEffect
 
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = React.useState({});
 
+    const columns: ColumnDef<Event>[] = [
+        {
+            accessorKey: "event_name",
+            header: ({ column }) => (
+                <Button
+                    className="w-full text-right"
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Event Name
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            ),
+            cell: ({ row }) => <div className="uppercase text-center">{row.getValue("event_name")}</div>,
+        },
+        {
+            accessorKey: "society_name",
+            header: "Society Name",
+
+            cell: ({ row }) => <div className=" w-full text-left">{row.getValue("society_name")}</div>,
+        },
+        {
+            accessorKey: "day_number",
+            header: "Day Number",
+            cell: ({ row }) => <div className="text-center -mr-10  -ml-20  ">{row.getValue("day_number")}</div>,
+        },
+        {
+            accessorKey: "venue",
+            header: "Venue",
+            cell: ({ row }) => <div className="text-center md:-ml-10 ">{row.getValue("venue")}</div>,
+        },
+        {
+            accessorKey: "time",
+            header: "Time",
+            cell: ({ row }) => <div className="flex  items-center md:-ml-10 justify-center "><TimeComponent timeValue={row.getValue("time")} />
+            </div>,
+        }
+
+        ,
+        {
+            accessorKey: "event_id",
+            enableHiding: false,
+            header: "Edit",
+            cell: ({ row }) => (
+                <div className="flex items-center md:-ml-10 justify-center">
+                    <EventDeleteDialogBox onEventDelete={fetchEventsData} eventId={row.getValue("event_id")} />
+                    <EventsEditForm eventData={row as unknown as EventDataProps} />
+                </div>
+            ),
+        },
+
+    ];
 
     const table = useReactTable({
         data: eventsData, // Use the fetched events data here instead of the hard-coded data

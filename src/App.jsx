@@ -13,7 +13,7 @@ import { AlertDialogDemo } from "./components/AlertDialogDemo";
 import { Toaster } from "./components/ui/toaster"
 import { AuthProvider } from "./components/auth/auth";
 import { RequireAuth } from "./components/auth/RequireAuth";
-import Leaderboard from "./pages/leaderboard";
+import LeaderboardPage from "./pages/leaderboard";
 import { Events } from "./pages/events";
 import Teamregister from "./pages/teamregister";
 import AdminLogin from "./pages/adminLogin";
@@ -31,7 +31,7 @@ function App() {
 
           {/* <Route path="/" element={<HomePage />} /> */}
             <Route path="/events" element={<Events />} />
-            <Route path="/leaderboard" element={ <Leaderboard />} />
+            <Route path="/leaderboard" element={ <LeaderboardPage />} />
             <Route path="/register" element={<Teamregister/> }/>
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<RequireAuth>  <AdminPanel />  </RequireAuth>} />

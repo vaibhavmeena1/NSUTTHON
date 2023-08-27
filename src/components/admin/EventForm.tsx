@@ -37,11 +37,11 @@ const EventFormSchema = z.object({
   event_name: z.string().min(4, "Event name must be at least 4 characters."),
   description: z.string().optional(),
   // rules: z.string().optional(),
-  day_number: z.number().min(1, "Day number must be at least 1.").int().optional(),
+  day_number: z.number().min(1, "Day number must be at least 1.").int(),
   time: z.string().refine(time => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/.test(time), {
     message: "Invalid time format.",
     path: []
-  }).optional(),
+  }),
   venue: z.string().optional(),
   society_name: z.string().max(50),
   pocs: z.array(
