@@ -17,9 +17,10 @@ import {
 // Define the prop types
 interface EventDeleteDialogBoxProps {
     eventId: number;
+    onEventDelete : () => void;
 }
   
-export function EventDeleteDialogBox({ eventId }: EventDeleteDialogBoxProps) {
+export function EventDeleteDialogBox({ eventId ,onEventDelete }: EventDeleteDialogBoxProps) {
     
 
     const deleteEvent = async () => {
@@ -30,8 +31,11 @@ export function EventDeleteDialogBox({ eventId }: EventDeleteDialogBoxProps) {
         if (response.status === 200) {
               // Call the callback after successful deletion
           toast({
+
             title: "Event deleted successfully!",
+           
           });
+          onEventDelete();
         } else {
           toast({
             title: "Error",
@@ -52,7 +56,7 @@ export function EventDeleteDialogBox({ eventId }: EventDeleteDialogBoxProps) {
     return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
+          <Button variant="ghost" className="h-8 w-8 p-0 border mr-2">
             <Trash className="h-4 w-4" />
           </Button>
         </AlertDialogTrigger>

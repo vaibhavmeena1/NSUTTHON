@@ -17,6 +17,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import FileSaver from "file-saver";  
+
 import axios from 'axios';
 
 import { TeamDetailsDialog } from "./Team/TeamViewDetail"
@@ -52,6 +54,7 @@ export type Team = {
 export function AdminTeamTable() {
   const [teams, setTeams] = React.useState<Team[]>([]); // To store the fetched data
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [isDownloading, setIsDownloading] = React.useState(false);  // new state to manage download status
 
   
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -76,6 +79,23 @@ export function AdminTeamTable() {
               console.error('Error fetching team data:', error);
           });
   };
+  
+  const downloadExcelFile = () => {
+    setIsDownloading(true);  // set downloading status to true when starting download
+
+    axios.get('http://localhost:3000/teams/export', {
+        responseType: 'blob'
+    })
+    .then(response => {
+        const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        FileSaver.saveAs(blob, 'users-details.xlsx');
+        setIsDownloading(false);  // set downloading status to false when download is done
+    })
+    .catch(error => {
+        console.error('Error downloading the file:', error);
+        setIsDownloading(false);  // set downloading status to false in case of an error
+    });
+};
 
   // Fetch data using Axios when the component mounts
   React.useEffect(fetchTeamData, []); // calling fetchTeamData directly in useEffect
@@ -127,14 +147,16 @@ export function AdminTeamTable() {
     },
     cell: ({ row }) => {
       const points = parseFloat(row.getValue("points"))
-      return <div className="flex  items-center  justify-center"><div className=" uppercase ">{points}  </div>   
+      return <div className="flex items-center justify-center">
+      <div className="uppercase flex w-2 justify-end text-right items-center">{points}</div>
       <PointsUpdateDialog 
-                points={row.getValue("points")} 
-                team_id={row.getValue("team_id")} 
-                team_name={row.getValue("team_name")}
-                onPointsUpdated={fetchTeamData} 
-            />
-      </div> 
+        points={row.getValue("points")} 
+        team_id={row.getValue("team_id")} 
+        team_name={row.getValue("team_name")}
+        onPointsUpdated={fetchTeamData} 
+      />
+    </div>
+    
     },
     // defaultSortOrder: 'desc',
   },
@@ -266,8 +288,13 @@ export function AdminTeamTable() {
           </TableBody>
         </Table>
       </div>
+      <button className="mt-2 opacity-90" onClick={downloadExcelFile} disabled={isDownloading}>
+                {isDownloading ? 'Downloading...' : 'Export to Excel'}
+            </button>
       <div className="flex items-center justify-end space-x-2 py-4">
       </div>
+
+      
     </div>
   )
 }

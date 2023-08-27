@@ -7,6 +7,9 @@ export const Events = () => {
 
     return (
         <div className=' p-8 md:p-16 lg:px-48 '>
+             <h1 className=" font-extrabold font-raleway  text-center pb-4 tracking-tight text-3xl  md:text-5xl">
+                        EVENTS
+                    </h1>
             <ul className="flex w-full list-none flex-wrap border-b-4 border-black dark:border-slate-100 m-0 p-0 text-end space-x-0 items-end">
                 <li className={` ${openTab === 1 ? "border-b-4 text-3xl" : "text-slate-500 text-2xl"} border-black   dark:border-slate-100 m-0 p-0`}>
                     <div onClick={e => {

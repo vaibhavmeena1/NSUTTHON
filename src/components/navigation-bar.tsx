@@ -33,13 +33,13 @@ export function NavigationBar() {
       <div className="flex space-x-4 hidden sm:flex">
         <Link to="/leaderboard">
           <Button variant="outline" className="w-full" type="button">
-            leaderboard
+            LEADERBOARD
 
           </Button>
         </Link>
         <Link to="/events">
           <Button variant="outline" className="w-full" type="button">
-            Events
+            EVENTS
           </Button>
 
         </Link>
@@ -70,14 +70,14 @@ export function NavigationBar() {
  */}
         <Link to="/register">
           <Button variant="outline" className="w-full" type="button">
-            Register
+            REGISTER
           </Button>
         </Link>
        
       {user && (
-        <Link to="/admin/dashboard">
+        <Link className=" hidden md:block" to="/admin/dashboard">
           <Button variant="outline" className="w-full" type="button">
-            Dashboard
+            DASHBOARD
           </Button>
         </Link>
       )}
