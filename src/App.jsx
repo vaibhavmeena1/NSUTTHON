@@ -18,6 +18,7 @@ import { Events } from "./pages/events";
 import Teamregister from "./pages/teamregister";
 import AdminLogin from "./pages/adminLogin";
 import AdminPanel from "./pages/adminPanel";
+import EventDetails from "./components/events/EventDetailed";
 function App() {
   return (
 
@@ -31,6 +32,7 @@ function App() {
 
           {/* <Route path="/" element={<HomePage />} /> */}
             <Route path="/events" element={<Events />} />
+            <Route path="/events/:eventId" element={ <EventDetails/>} />
             <Route path="/leaderboard" element={ <LeaderboardPage />} />
             <Route path="/register" element={<Teamregister/> }/>
             <Route path="/admin/login" element={<AdminLogin />} />

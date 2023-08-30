@@ -97,7 +97,7 @@ function onSubmit(data: z.infer<typeof EventFormSchema>) {
     }
   };
 
-  axios.post('http://localhost:3000/registerevent', data, config)
+  axios.post(`${import.meta.env.VITE_BACKEND_URL}/registerevent`, data, config)
     .then((response) => {
       if (response.status === 200) {
         toast({

@@ -66,7 +66,7 @@ export function Leaderboard() {
 
     // fetch team data function
     const fetchTeamData = () => {
-      axios.get('http://localhost:3000/teams')
+      axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams`)
           .then(response => {
               setTeams(response.data);
           })

@@ -50,7 +50,7 @@ export function AdminEventsTable() {
     const [eventsData, setEventsData] = useState<Event[]>([]);
     // Fetch events data function
     const fetchEventsData = () => {
-        axios.get('http://localhost:3000/events')
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/events`)
             .then(response => {
                 setEventsData(response.data);
                 console.log(response.data);

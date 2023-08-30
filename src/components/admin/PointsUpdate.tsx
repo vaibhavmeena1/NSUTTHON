@@ -31,7 +31,7 @@ export function PointsUpdateDialog({ team_id, points, team_name, onPointsUpdated
     const updatedPoints = teamPoints + ((pointsToAdd as string) === "" || (pointsToAdd as string) === "-" ? 0 : Number(pointsToAdd));
     const handleSave = () => {
         setIsLoading(true);
-        axios.put("http://localhost:3000/teams/update-points", {
+        axios.put(`${import.meta.env.VITE_BACKEND_URL}/teams/update-points`, {
             team_id: team_id, // Use team_id from props
             points: updatedPoints
         })

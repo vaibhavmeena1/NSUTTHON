@@ -75,7 +75,7 @@ function RegisterForm({ numberOfMembers, teamName }) {
             };
             
             // POST data using Axios
-            axios.post('http://localhost:3000/register', teamDetails)
+            axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, teamDetails)
                 .then(res => {
                     if (res.status === 201) {
                         navigate('/events');

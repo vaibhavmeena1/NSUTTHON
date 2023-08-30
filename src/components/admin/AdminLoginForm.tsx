@@ -47,7 +47,7 @@ export function AdminLoginForm() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/admin/login", data);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/admin/login`, data);
 
       if (response.status === 200) {  // Here's the change: check for 200 OK status
         // Use the login function to store the JWT in local storage and update the user state

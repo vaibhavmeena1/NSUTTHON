@@ -45,7 +45,7 @@ interface TeamDetailsDialogProps {
   
     async function fetchTeamDetails() {
       try {
-        const response = await axios.get<TeamMember[]>(`http://localhost:3000/team-members/${team_id}`);
+        const response = await axios.get<TeamMember[]>(`${import.meta.env.VITE_BACKEND_URL}/team-members/${team_id}`);
         setTeamDetails(response.data);
       } catch (error) {
         console.error('Failed to fetch team details:', error);
