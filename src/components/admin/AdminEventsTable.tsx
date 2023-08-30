@@ -40,7 +40,7 @@ import {
 } from "@/components/ui/table"
 
 import TimeComponent from "./Event/EditTimeFormat"
-import { EventsEditForm, EventDataProps } from "./Event/EventEdit"
+// import { EventDataProps } from "./Event/EventEdit"
 
 
 
@@ -114,7 +114,7 @@ export function AdminEventsTable() {
             cell: ({ row }) => (
                 <div className="flex items-center md:-ml-10 justify-center">
                     <EventDeleteDialogBox onEventDelete={fetchEventsData} eventId={row.getValue("event_id")} />
-                    <EventsEditForm eventData={row as unknown as EventDataProps} />
+                    {/* <EventsEditForm eventData={row as unknown as EventDataProps} /> */}
                 </div>
             ),
         },
