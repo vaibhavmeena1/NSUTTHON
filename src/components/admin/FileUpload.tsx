@@ -46,7 +46,7 @@ const FileUpload: React.FC<Props> = ({ onBanner1Upload, onBanner2Upload }) => { 
         Key: newName,
         Body: file,
       };
-    
+      
       try {
         await s3Client.send(new PutObjectCommand(params));
         const url = `https://${params.Bucket}.s3.${import.meta.env.VITE_AWS_REGION}.amazonaws.com/${params.Key}`;
