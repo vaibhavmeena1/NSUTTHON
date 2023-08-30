@@ -26,7 +26,7 @@ export function EventDeleteDialogBox({ eventId ,onEventDelete }: EventDeleteDial
     const deleteEvent = async () => {
       try {
         // Send a DELETE request to the backend
-        const response = await axios.delete(`http://localhost:3000/eventdelete/${eventId}`);
+        const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/eventdelete/${eventId}`);
 
         if (response.status === 200) {
               // Call the callback after successful deletion

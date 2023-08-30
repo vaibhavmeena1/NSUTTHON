@@ -71,7 +71,7 @@ export function AdminTeamTable() {
 
     // fetch team data function
     const fetchTeamData = () => {
-      axios.get('http://localhost:3000/teams')
+      axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams`)
           .then(response => {
               setTeams(response.data);
           })
@@ -83,7 +83,7 @@ export function AdminTeamTable() {
   const downloadExcelFile = () => {
     setIsDownloading(true);  // set downloading status to true when starting download
 
-    axios.get('http://localhost:3000/teams/export', {
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams/export`, {
         responseType: 'blob'
     })
     .then(response => {

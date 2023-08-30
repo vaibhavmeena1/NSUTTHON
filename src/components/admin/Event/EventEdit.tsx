@@ -188,7 +188,7 @@ export function EventsEditForm({ eventData }: EventsEditFormProps) {
       }
     };
 
-    axios.put('http://localhost:3000/edit-event', data, config)
+    axios.put(`${import.meta.env.VITE_BACKEND_URL}/edit-event`, data, config)
       .then((response) => {
         if (response.status === 200) {
           toast({
