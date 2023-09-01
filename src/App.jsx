@@ -19,6 +19,7 @@ import Teamregister from "./pages/teamregister";
 import AdminLogin from "./pages/adminLogin";
 import AdminPanel from "./pages/adminPanel";
 import EventDetails from "./components/events/EventDetailed";
+import SuccessPage from "./components/team/Success";
 function App() {
   return (
 
@@ -36,6 +37,7 @@ function App() {
             <Route path="/leaderboard" element={ <LeaderboardPage />} />
             <Route path="/register" element={<Teamregister/> }/>
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/success" element={<SuccessPage />} />
             <Route path="/admin/dashboard" element={<RequireAuth>  <AdminPanel />  </RequireAuth>} />
             {/* <Route path="/login" element={<LoginPage />} /> */}
             {/* <Route path="/profile" element={<RequireAuth>  <Profile />  </RequireAuth>} />
