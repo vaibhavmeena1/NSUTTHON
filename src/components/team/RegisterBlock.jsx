@@ -38,7 +38,7 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
     }, [name, email, phone, branch, rollno]);
 
     return (
-        
+
 
         <div className="flex flex-col my-5  rounded-md p-5 border  space-x-4 " >
 
@@ -57,7 +57,7 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
                         onClick={() => setIsOpen(true)}
                         value={name}
                         required
-                        maxLength="30" 
+                        maxLength="30"
                         onChange={e => setName(e.target.value.toUpperCase())}
                         className=" outline-none font-mont w-full bg-transparent  ml-2 md:ml-6 p-1 font-bold text-lg md:text-xl "
                     />
@@ -79,16 +79,19 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
                             <input
                                 required
                                 type="email"
-                                maxLength="40" 
+                                maxLength="40"
                                 placeholder="EMAIL"
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                                title="Please enter a valid email format e.g. john.doe@example.com"
                                 className="outline-none font-mont bg-transparent p-1 mt-2 ml-9 md:ml-14 font-bold text-lg md:text-xl w-full"
                                 value={email}
-                                onChange={e => setEmail(e.target.value.toUpperCase())} // Convert to uppercase
+                                onChange={e => setEmail(e.target.value.toUpperCase())}
                             />
+
 
                             <input
                                 type="tel"
-                                maxLength="12" 
+                                maxLength="12"
                                 placeholder="PHONE NO"
                                 className="outline-none bg-transparent p-1 ml-9 md:ml-14 font-bold w-full text-lg md:text-xl"
                                 value={phone}
@@ -97,28 +100,28 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
                             />
 
 
-                            <Select  onValueChange={setBranch} value={branch}   >
-                            <SelectTrigger className="w-[180px] ml-9 md:ml-14">
-                            <h1 className="font-bold  text-lg  dark:text-slate-100 text-black md:text-xl">
-                            <SelectValue placeholder={<h1 className=" text-slate-400 ">{'BRANCH'}</h1>} /> </h1>
-                            </SelectTrigger>
-                            <SelectContent >
-                            <ScrollArea className="h-56 md:h-72 ">
-                            {options.map((group) => (
-                                <React.Fragment key={group.label}>
-                                <SelectGroup>
-                                    <SelectLabel>{group.label}</SelectLabel>
-                                    {group.options.map((option) => (
-                                    <SelectItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </SelectItem>
-                                    ))}
-                                </SelectGroup>
-                                </React.Fragment>
-                            ))}
-                             </ScrollArea>
-                            </SelectContent>
-                        </Select>
+                            <Select onValueChange={setBranch} value={branch}   >
+                                <SelectTrigger className="w-[180px] ml-9 md:ml-14">
+                                    <h1 className="font-bold  text-lg  dark:text-slate-100 text-black md:text-xl">
+                                        <SelectValue placeholder={<h1 className=" text-slate-400 ">{'BRANCH'}</h1>} /> </h1>
+                                </SelectTrigger>
+                                <SelectContent >
+                                    <ScrollArea className="h-56 md:h-72 ">
+                                        {options.map((group) => (
+                                            <React.Fragment key={group.label}>
+                                                <SelectGroup>
+                                                    <SelectLabel>{group.label}</SelectLabel>
+                                                    {group.options.map((option) => (
+                                                        <SelectItem key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectGroup>
+                                            </React.Fragment>
+                                        ))}
+                                    </ScrollArea>
+                                </SelectContent>
+                            </Select>
 
                             {/* <BranchSelect /> */}
                             <input
@@ -126,7 +129,7 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
                                 placeholder="ROLL NO"
                                 value={rollno}
                                 required
-                                maxLength="15" 
+                                maxLength="15"
                                 onChange={e => setRollno(e.target.value.toUpperCase())}
                                 className="outline-none bg-transparent p-1 ml-9 md:ml-14  font-bold w-full  text-lg md:text-xl"
 
@@ -137,9 +140,9 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
 
             </CSSTransition>
 
-        </div> 
-        
-       
+        </div>
+
+
 
     )
 }

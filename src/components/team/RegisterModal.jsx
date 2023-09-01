@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import RegisterBlock from './RegisterBlock';
 import { Button } from "@/components/ui/button"
-import  '../styles/transition.css';
+import '../styles/transition.css';
 import { CSSTransition } from 'react-transition-group';
 import { useToast } from "@/components/ui/use-toast"
 import { TransitionGroup } from 'react-transition-group';
-import {PopupDialog} from './Popup';
+import { PopupDialog } from './Popup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -73,12 +73,19 @@ function RegisterForm({ numberOfMembers, teamName }) {
                 teamName: teamName,
                 members: members
             };
-            
+
             // POST data using Axios
             axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, teamDetails)
                 .then(res => {
                     if (res.status === 201) {
-                        navigate('/events');
+                        const { teamId: receivedTeamId } = res.data;
+                        console.log("Team ID received:", receivedTeamId)
+                        console.log("Team name:", teamName)
+
+                        navigate({
+                            pathname: '/success',
+                            state: { teamId: receivedTeamId, teamName: teamName }
+                        });
                         setShowPopup(false);
                         toast({
                             // variant: "positive",
@@ -106,30 +113,29 @@ function RegisterForm({ numberOfMembers, teamName }) {
             setShowPopup(false);
         }
     };
-    
-    
 
-        return (
-            <div>
-                {members.map((member, index) => (
-                    <RegisterBlock 
-                        key={index} 
-                        member={member} 
-                        saveMemberDetails={(newMember) => saveMemberDetails(index, newMember)}
-                        index={index + 1}
-                    />
-                ))}
-                <Button className="w-full bg-green-400 font-semibold text-xl py-6" onClick={submitDetails} >SUBMIT</Button>
-                
-                {showPopup && 
-                <PopupDialog 
-                     teamName={teamName} members= {members}
-                        onResponse={handlePopupResponse} 
-                    />
-                }
-            </div>
-        );
-    }
-    ;
+
+
+    return (
+        <div>
+            {members.map((member, index) => (
+                <RegisterBlock
+                    key={index}
+                    member={member}
+                    saveMemberDetails={(newMember) => saveMemberDetails(index, newMember)}
+                    index={index + 1}
+                />
+            ))}
+            <Button className="w-full bg-green-400 font-semibold text-xl py-6" onClick={submitDetails} >SUBMIT</Button>
+
+            {showPopup &&
+                <PopupDialog
+                    teamName={teamName} members={members}
+                    onResponse={handlePopupResponse}
+                />
+            }
+        </div>
+    );
+}
+;
 export default RegisterForm;
-      
