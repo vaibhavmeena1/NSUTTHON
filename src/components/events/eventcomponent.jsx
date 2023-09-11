@@ -37,7 +37,6 @@ const EventGrid = ({ openTab }) => {
           onClick={() => navigate(`/events/${event.event_id}`, { state: { event } })}
         >
           <div className="relative w-full overflow-hidden">
-            {/* Padding trick to maintain aspect ratio */}
             <div style={{ paddingBottom: "100%" }}></div>
 
             <img
