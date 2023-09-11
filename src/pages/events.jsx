@@ -16,7 +16,7 @@ export const Events = () => {
                         e.preventDefault();
                         setOpenTab(1);
                     }}>
-                        <h1 className={`${openTab === 1 ? "md:text-4xl sm:transition-all text-3xl" : "md:text-2xl transition-all sm:hover:text-3xl text-2xl"} md:pb-4 pb-2 font-extrabold tracking-tight  px-2 sm:px-4`}>
+                        <h1 className={`${openTab === 1 ? "md:text-3xl sm:transition-all text-3xl" : "md:text-2xl sm:transition-all sm:hover:text-3xl text-2xl"} md:pb-4 pb-2 font-extrabold tracking-tight  px-2 sm:px-4`}>
                             DAY 1
                         </h1>
                     </div>
@@ -27,7 +27,7 @@ export const Events = () => {
                         e.preventDefault();
                         setOpenTab(2);
                     }}>
-                        <h1 className={`${openTab === 2 ? "md:text-4xl sm:transition-all text-3xl" : "md:text-2xl  transition-all sm:hover:text-3xl text-2xl"} md:pb-4 pb-2 font-extrabold tracking-tight   px-2 sm:px-4`}>
+                        <h1 className={`${openTab === 2 ? "md:text-3xl sm:transition-all text-3xl" : "md:text-2xl  sm:transition-all sm:hover:text-3xl text-2xl"} md:pb-4 pb-2 font-extrabold tracking-tight   px-2 sm:px-4`}>
                             DAY 2
                         </h1>
                     </div>
@@ -37,7 +37,7 @@ export const Events = () => {
                         e.preventDefault();
                         setOpenTab(3);
                     }}>
-                        <h1 className={`${openTab === 3 ? "md:text-4xl sm:transition-all text-3xl" : "md:text-2xl transition-all sm:hover:text-3xl text-2xl"} md:pb-4 pb-2 text-left font-extrabold   px-2 sm:px-4  `}>
+                        <h1 className={`${openTab === 3 ? "md:text-3xl sm:transition-all text-3xl" : "md:text-2xl sm:transition-all sm:hover:text-3xl text-2xl"} md:pb-4 pb-2 text-left font-extrabold   px-2 sm:px-4  `}>
                             DAY 3
                         </h1>
                     </div>
