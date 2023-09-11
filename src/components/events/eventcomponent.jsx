@@ -50,7 +50,7 @@ const EventGrid = ({ openTab }) => {
           />
       
           {/* Time component positioned over the image */}
-          <div className="absolute bottom-0 right-4 dark:mb-[1px] bg-white dark:border-b-0 dark:border-white   border dark:bg-[#03050a] px-2 py-1 rounded-t-md">
+          <div className="absolute bottom-0 right-2 sm:right-4 dark:mb-[1px] bg-white dark:border-b-0 dark:border-white   border dark:bg-[#03050a] px-1 sm:px-2 py-0.5 sm:py-1 rounded-t-md">
             <TimeComponent timeValue={event.time} className="" />
           </div>
         </div>
