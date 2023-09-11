@@ -10,6 +10,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Loader2 } from "lucide-react"
 import { useAuth } from  "@/components/auth/auth";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // import styles
+
 import {
   Form,
   FormControl,
@@ -53,9 +56,31 @@ const EventFormSchema = z.object({
   banner_url_1: z.string().optional(),
   banner_url_2: z.string().optional(),
   registration_link: z.string().optional(),
-  event_type: z.string().optional(),
+  // event_type: z.string().optional(),
 });
 
+const modules = {
+  toolbar: [
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+    [{size: []}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, 
+     {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image', 'video'],
+    ['clean']
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  }
+}
+
+const formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video'
+]
 
 
 
@@ -251,7 +276,7 @@ function onSubmit(data: z.infer<typeof EventFormSchema>) {
             />
 
             {/* Event Type */}
-            <FormField
+            {/* <FormField
               control={form.control}
               name="event_type"
               render={({ field }) => (
@@ -263,7 +288,7 @@ function onSubmit(data: z.infer<typeof EventFormSchema>) {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
 
 
           </div>
@@ -273,24 +298,31 @@ function onSubmit(data: z.infer<typeof EventFormSchema>) {
 
 
         <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem className="py-4">
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  rows={10}
-                  className="w-full  bg-transparent"
-                  placeholder="Enter description"
-                  {...field}
-                ></Textarea>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+  control={form.control}
+  name="description"
+  render={({ field }) => (
+    <FormItem className="py-4">
+      <FormLabel>Description</FormLabel>
+      <FormControl>
+        <ReactQuill 
+          value={field.value}
+          onChange={(content) => {
+            field.onChange({
+                target: {
+                    name: field.name,
+                    value: content
+                }
+            });
+        }}
+        className="w-full bg-transparent h-56 my-quill-editor"
+        modules={modules}
+          formats={formats}
         />
-
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
 
         {/* ... Add other fields similarly ... */}
 
@@ -312,7 +344,7 @@ function onSubmit(data: z.infer<typeof EventFormSchema>) {
 
         {/* ... similar pattern for the rest of the fields ... */}
 
-        <div className="md:flex gap-12 ">
+        <div className="md:flex pt-24 md:pt-10 gap-12 ">
         <FileUpload 
           onBanner1Upload={(url) => setBanner1Url(url)} 
           onBanner2Upload={(url) => setBanner2Url(url)}
