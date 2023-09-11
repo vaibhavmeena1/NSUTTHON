@@ -2,12 +2,17 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import TimeComponent from "../admin/Event/EditTimeFormat";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, Calendar } from "lucide-react";
-import { Separator } from "@/components/ui/separator"
+import { MapPin, Clock, Calendar ,User,Phone} from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import DOMPurify from 'dompurify';
+import 'react-quill/dist/quill.snow.css'; // Or another theme of your choice
+
 
 const EventDetails = () => {
+
   const location = useLocation();
   const event = location.state.event;
+  const sanitizedDescription = DOMPurify.sanitize(event.description);
 
   const [openTab, setOpenTab] = React.useState(1);
   {
@@ -26,7 +31,7 @@ const EventDetails = () => {
 
       <div className="w-full border  ">
         {/* Profile Image with Event details */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+        <div className="flex rounded-bl sm:border flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
           {/* Profile Image */}
           <div className=" sm:flex-none items-center justify-center">
             <img
@@ -63,9 +68,7 @@ const EventDetails = () => {
                   </div>
                   <div className="flex sm:w-auto items-center sm:gap-2">
                     <MapPin className="h-auto" />
-                    <span className=" text-lg  sm:text-2xl">
-                      {event.venue}
-                    </span>
+                    <span className=" text-lg  sm:text-2xl">{event.venue}</span>
                   </div>
                 </div>
               </div>
@@ -103,39 +106,50 @@ const EventDetails = () => {
             </a>
           </Button>
         </div>
+        <div className="  sm:hidden flex mt-4 sm:mt-0 justify-center ">
+          <Separator className="  w-11/12" />
+        </div>
 
         {/* Description */}
-        <hi className=" justify-center underline mt-4 flex font-raleway text-lg sm:text-xl">
+        <h1 className=" justify-center underline mt-4 flex font-raleway text-lg sm:text-xl">
           ABOUT THE EVENT
-        </hi>
-
-        <h1 className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl">
-          {event.description}
         </h1>
 
-        {/* Event POC details */}
-        <div>
-        <h1 className=" justify-center  mt-4 flex font-raleway text-lg sm:text-xl">
-            EVENT POC
-          </h1>
-          <div className="space-y-1">
-            {event.name_poc_1 && event.phone_poc_1 && (
-              <p>
-                {event.name_poc_1} - {event.phone_poc_1}
-              </p>
-            )}
-            {event.name_poc_2 && event.phone_poc_2 && (
-              <p>
-                {event.name_poc_2} - {event.phone_poc_2}
-              </p>
-            )}
-            {event.name_poc_3 && event.phone_poc_3 && (
-              <p>
-                {event.name_poc_3} - {event.phone_poc_3}
-              </p>
-            )}
+        {/* <h1 className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl">
+          {event.description}
+        </h1> */}
+        {/* <div className=" pt-2 px-4 sm:px-8 " dangerouslySetInnerHTML={{ __html: event.description }}></div> */}
+        <div className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl" dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></div>
+
+        {(event.name_poc_2 || event.name_poc_1) && (
+          <div className=" px-4 pb-4 sm:pt-2">
+            <h1 className="text-center  font-raleway text-lg sm:text-xl">
+              EVENT POCs
+            </h1>
+            <div className=" w-full justify-center sm:flex  ">
+            <div className="mt-4 sm:w-3/4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {event.name_poc_1 && event.phone_poc_1 && (
+                <div className="border p-2   rounded-md shadow">
+                  <p className="font-bold mb-1 flex gap-2 uppercase"> <User /> {event.name_poc_1}</p>
+                  <p className=" gap-2 flex"> <Phone/> {event.phone_poc_1}</p>
+                </div>
+              )}
+              {event.name_poc_2 && event.phone_poc_2 && (
+                <div className="border p-2   rounded-md shadow">
+                  <p className="font-bold mb-1 flex gap-2 uppercase"> <User /> {event.name_poc_2}</p>
+                  <p className=" gap-2 flex"> <Phone/> {event.phone_poc_2}</p>
+                </div>
+              )}
+              {event.name_poc_3 && event.phone_poc_3 && (
+                <div className="border p-2    rounded-md shadow">
+                  <p className="font-bold mb-1 flex gap-2 uppercase"> <User /> {event.name_poc_3}</p>
+                  <p className=" gap-2 flex"> <Phone/> {event.phone_poc_3}</p>
+                </div>
+              )}
+            </div>
+                </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
