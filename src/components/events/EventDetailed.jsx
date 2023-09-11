@@ -2,23 +2,30 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import TimeComponent from "../admin/Event/EditTimeFormat";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, Calendar ,User,Phone} from "lucide-react";
+import { MapPin, Clock, Calendar, User, Phone } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import DOMPurify from 'dompurify';
-import 'react-quill/dist/quill.snow.css'; // Or another theme of your choice
-
+import ImageScroller from "./EventImages";
+import DOMPurify from "dompurify";
+import "react-quill/dist/quill.snow.css"; // Or another theme of your choice
 
 const EventDetails = () => {
-
   const location = useLocation();
   const event = location.state.event;
   const sanitizedDescription = DOMPurify.sanitize(event.description);
+  const countPOCs = () => {
+    let count = 0;
+    if (event.name_poc_1 && event.phone_poc_1) count++;
+    if (event.name_poc_2 && event.phone_poc_2) count++;
+    if (event.name_poc_3 && event.phone_poc_3) count++;
+    return count;
+  };
+
+  const pocCount = countPOCs();
 
   const [openTab, setOpenTab] = React.useState(1);
   {
     /* Banner 2 */
-  }
-  {
+
     /* <div className="w-full mb-4   rounded-md border dark:border-white border-black ">
                     <img src={event.banner_url_2} alt="Event Banner" style={{ aspectRatio: "30 / 9" }} className="h-full w-full object-cover  rounded-md" />
                 </div> */
@@ -33,12 +40,14 @@ const EventDetails = () => {
         {/* Profile Image with Event details */}
         <div className="flex rounded-bl sm:border flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
           {/* Profile Image */}
-          <div className=" sm:flex-none items-center justify-center">
-            <img
+          <div className=" sm:flex-none  sm:max-h-64 rounded items-center justify-center">
+            {/* <img
               src={event.banner_url_1}
               alt="Event Poster"
               className="w-full  sm:max-h-64 rounded"
-            />
+            /> */}
+                  <ImageScroller imageLinks={[event.banner_url_1, event.banner_url_2, event.banner_url_3]} />
+
           </div>
 
           <div className="  relative w-full">
@@ -119,35 +128,70 @@ const EventDetails = () => {
           {event.description}
         </h1> */}
         {/* <div className=" pt-2 px-4 sm:px-8 " dangerouslySetInnerHTML={{ __html: event.description }}></div> */}
-        <div className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl" dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></div>
+        <div
+          className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl"
+          dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
+        ></div>
 
-        {(event.name_poc_2 || event.name_poc_1) && (
+        {pocCount > 0 && (
           <div className=" px-4 pb-4 sm:pt-2">
-            <h1 className="text-center  font-raleway text-lg sm:text-xl">
+            <h1 className="text-center font-raleway text-lg sm:text-xl">
               EVENT POCs
             </h1>
-            <div className=" w-full justify-center sm:flex  ">
-            <div className="mt-4 sm:w-3/4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {event.name_poc_1 && event.phone_poc_1 && (
-                <div className="border p-2   rounded-md shadow">
-                  <p className="font-bold mb-1 flex gap-2 uppercase"> <User /> {event.name_poc_1}</p>
-                  <p className=" gap-2 flex"> <Phone/> {event.phone_poc_1}</p>
-                </div>
-              )}
-              {event.name_poc_2 && event.phone_poc_2 && (
-                <div className="border p-2   rounded-md shadow">
-                  <p className="font-bold mb-1 flex gap-2 uppercase"> <User /> {event.name_poc_2}</p>
-                  <p className=" gap-2 flex"> <Phone/> {event.phone_poc_2}</p>
-                </div>
-              )}
-              {event.name_poc_3 && event.phone_poc_3 && (
-                <div className="border p-2    rounded-md shadow">
-                  <p className="font-bold mb-1 flex gap-2 uppercase"> <User /> {event.name_poc_3}</p>
-                  <p className=" gap-2 flex"> <Phone/> {event.phone_poc_3}</p>
-                </div>
-              )}
+            <div className=" w-full justify-center sm:flex ">
+              <div
+                className={`mt-4 sm:w-3/4 grid grid-cols-1 sm:grid-cols-${pocCount} gap-4`}
+              >
+                {event.name_poc_1 && event.phone_poc_1 && (
+                  <a
+                    href={`https://api.whatsapp.com/send?phone=91${event.phone_poc_1}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="border p-2 rounded-md shadow cursor-pointer hover:opacity-90">
+                      <p className="font-bold mb-1 flex gap-2 uppercase">
+                        <User /> {event.name_poc_1}
+                      </p>
+                      <p className=" gap-2 flex">
+                        <Phone /> {event.phone_poc_1}
+                      </p>
+                    </div>
+                  </a>
+                )}
+                {event.name_poc_2 && event.phone_poc_2 && (
+                  <a
+                    href={`https://api.whatsapp.com/send?phone=91${event.phone_poc_2}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="border p-2 rounded-md shadow cursor-pointer hover:opacity-90">
+                      <p className="font-bold mb-1 flex gap-2 uppercase">
+                        <User /> {event.name_poc_2}
+                      </p>
+                      <p className=" gap-2 flex">
+                        <Phone /> {event.phone_poc_2}
+                      </p>
+                    </div>
+                  </a>
+                )}
+                {event.name_poc_3 && event.phone_poc_3 && (
+                  <a
+                    href={`https://api.whatsapp.com/send?phone=91${event.phone_poc_3}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="border p-2 rounded-md shadow cursor-pointer hover:opacity-90">
+                      <p className="font-bold mb-1 flex gap-2 uppercase">
+                        <User /> {event.name_poc_3}
+                      </p>
+                      <p className=" gap-2 flex">
+                        <Phone /> {event.phone_poc_3}
+                      </p>
+                    </div>
+                  </a>
+                )}
+              </div>
             </div>
-                </div>
           </div>
         )}
       </div>
