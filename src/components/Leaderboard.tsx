@@ -104,18 +104,14 @@ export function Leaderboard() {
     },
     cell: ({ row }) => <div className="uppercase  text-center ">{row.getValue("team_name")}</div>,
   },
-  {
-    accessorKey: "team_id",
-    header: "Team ID",
-    cell: ({ row }) => row.getValue("team_id"),
-  },
+ 
   {
     accessorKey: "points",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          className="w-full -mr-20"
+          className="w-full "
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Points
@@ -130,6 +126,13 @@ export function Leaderboard() {
       </div> 
     },
     // defaultSortOrder: 'desc',
+  },
+  {
+    accessorKey: "team_id",
+    header: "Team ID",
+    
+    cell: ({ row }) => row.getValue("team_id"),
+    
   },
 
 
