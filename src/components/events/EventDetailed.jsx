@@ -132,7 +132,7 @@ const EventDetails = () => {
           className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl"
           dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
         ></div>
-
+      
         {pocCount > 0 && (
           <div className=" px-4 pb-4 sm:pt-2">
             <h1 className="text-center font-raleway text-lg sm:text-xl">
