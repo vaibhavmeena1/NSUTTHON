@@ -13,7 +13,7 @@ const ImageScroller = ({ imageLinks }) => {
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % filteredImageLinks.length);
         setTransitioning(false);
-      }, 300); // duration of the transition
+      }, 100); // duration of the transition
     }, 10000); // 10 seconds
 
     return () => clearInterval(interval);

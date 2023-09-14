@@ -82,10 +82,8 @@ function RegisterForm({ numberOfMembers, teamName }) {
                         console.log("Team ID received:", receivedTeamId)
                         console.log("Team name:", teamName)
 
-                        navigate({
-                            pathname: '/success',
-                            state: { teamId: receivedTeamId, teamName: teamName }
-                        });
+                        navigate('/success', { state: { teamId: receivedTeamId, teamName: teamName } });
+
                         setShowPopup(false);
                         toast({
                             // variant: "positive",
