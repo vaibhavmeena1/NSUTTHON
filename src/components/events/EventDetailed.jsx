@@ -55,7 +55,7 @@ const EventDetails = () => {
               {/* Event details below the image in mobile and beside the image in larger views */}
               <div className="w-full items-center sm:items-start   flex flex-col  ">
                 <div className=" py-2 sm:py-4">
-                  <h1 className="font-raleway flex justify-center sm:justify-normal font-extrabold text-4xl sm:text-5xl md:text-6xl ">
+                  <h1 className="font-raleway flex justify-center sm:justify-normal font-extrabold text-4xl  md:text-5xl ">
                     {event.event_name}
                   </h1>
                   <p className="font-raleway flex justify-center sm:justify-normal opacity-70 text-xl sm:text-2xl ">
@@ -83,7 +83,7 @@ const EventDetails = () => {
               </div>
             </div>
             {/* Registration button */}
-            <div className="py-4 scale-95 xl:scale-125  xl:absolute top-1/3 max-w-xl align-middle right-10 sm:flex hidden  items-center justify-center">
+            <div className="py-4 scale-95 xl:scale-125 mt-3 xl:absolute top-1/3 max-w-xl align-middle right-10 sm:flex hidden  items-center justify-center">
               <Button
                 variant="destructive"
                 className="w-full font-raleway sm:text-xl"
