@@ -13,6 +13,7 @@ const EventDetails = () => {
   const event = location.state.event;
   const sanitizedDescription = DOMPurify.sanitize(event.description);
   const countPOCs = () => {
+    <div className=",m "></div>
     let count = 0;
     if (event.name_poc_1 && event.phone_poc_1) count++;
     if (event.name_poc_2 && event.phone_poc_2) count++;
@@ -75,15 +76,19 @@ const EventDetails = () => {
                       <TimeComponent timeValue={event.time} />
                     </span>
                   </div>
-                  <div className="flex sm:w-auto items-center sm:gap-2">
-                    <MapPin className="h-auto" />
-                    <span className=" text-lg  sm:text-2xl">{event.venue}</span>
-                  </div>
+                  {
+    event.venue &&
+    <div className="flex sm:w-auto items-center sm:gap-2">
+        <MapPin className="h-auto" />
+        <span className="text-lg sm:text-2xl">{event.venue}</span>
+    </div>
+}
+
                 </div>
               </div>
             </div>
             {/* Registration button */}
-            <div className="py-4 scale-95 xl:scale-125 mt-3 xl:absolute top-1/3 max-w-xl align-middle right-10 sm:flex hidden  items-center justify-center">
+            <div className="py-4  mt-3 xl:absolute top-1/3 max-w-xl align-middle right-10 sm:flex hidden  items-center justify-center">
               <Button
                 variant="destructive"
                 className="w-full font-raleway sm:text-xl"
