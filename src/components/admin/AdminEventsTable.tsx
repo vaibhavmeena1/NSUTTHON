@@ -102,7 +102,7 @@ export function AdminEventsTable() {
         {
             accessorKey: "time",
             header: "Time",
-            cell: ({ row }) => <div className="flex  items-center md:-ml-10 justify-center "><TimeComponent timeValue={row.getValue("time")} />
+            cell: ({ row }) => <div className="flex  items-center  justify-center "><TimeComponent timeValue={row.getValue("time")} />
             </div>,
         }
 
