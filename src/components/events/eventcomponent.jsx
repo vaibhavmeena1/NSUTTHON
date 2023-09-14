@@ -24,12 +24,23 @@ const EventGrid = ({ openTab }) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchEvents();
-      setEvents(data);
+      
+      // Sort the events based on time in ascending order
+      const sortedEvents = data.sort((a, b) => {
+        if (a.time < b.time) return -1;
+        if (a.time > b.time) return 1;
+        return 0;
+      });
+      
+      setEvents(sortedEvents);
     };
+    
     fetchData();
   }, []); // <-- Fetch events only once when the component mounts
 
   const filteredEvents = events.filter((event) => event.day_number === openTab);
+  // ... [rest of the component]
+
   return (
     <div className="grid grid-cols-2  md:grid-cols-4 gap-4 md:gap-7">
       {filteredEvents.map((event) => (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import TimeComponent from "../admin/Event/EditTimeFormat";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ const EventDetails = () => {
   const event = location.state.event;
   const sanitizedDescription = DOMPurify.sanitize(event.description);
   const countPOCs = () => {
-    <div className=",m "></div>
+    <div className=",m "></div>;
     let count = 0;
     if (event.name_poc_1 && event.phone_poc_1) count++;
     if (event.name_poc_2 && event.phone_poc_2) count++;
@@ -23,10 +23,30 @@ const EventDetails = () => {
 
   const pocCount = countPOCs();
 
+  const [isSm, setIsSm] = useState(window.innerWidth >= 640);
+  const gridStyles = isSm
+    ? {
+        display: "grid",
+        gridTemplateColumns: `repeat(${pocCount}, 1fr)`,
+      }
+    : {};
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSm(window.innerWidth >= 640);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const [openTab, setOpenTab] = React.useState(1);
   {
     /* Banner 2 */
-
     /* <div className="w-full mb-4   rounded-md border dark:border-white border-black ">
                     <img src={event.banner_url_2} alt="Event Banner" style={{ aspectRatio: "30 / 9" }} className="h-full w-full object-cover  rounded-md" />
                 </div> */
@@ -47,8 +67,13 @@ const EventDetails = () => {
               alt="Event Poster"
               className="w-full  sm:max-h-64 rounded"
             /> */}
-                  <ImageScroller imageLinks={[event.banner_url_1, event.banner_url_2, event.banner_url_3]} />
-
+            <ImageScroller
+              imageLinks={[
+                event.banner_url_1,
+                event.banner_url_2,
+                event.banner_url_3,
+              ]}
+            />
           </div>
 
           <div className="  relative w-full">
@@ -76,19 +101,19 @@ const EventDetails = () => {
                       <TimeComponent timeValue={event.time} />
                     </span>
                   </div>
-                  {
-    event.venue &&
-    <div className="flex sm:w-auto items-center sm:gap-2">
-        <MapPin className="h-auto" />
-        <span className="text-lg sm:text-2xl">{event.venue}</span>
-    </div>
-}
-
+                  {event.venue && (
+                    <div className="flex sm:w-auto items-center sm:gap-2">
+                      <MapPin className="h-auto" />
+                      <span className="text-lg sm:text-2xl uppercase">
+                        {event.venue}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
             {/* Registration button */}
-            <div className="py-4  mt-3 xl:absolute top-1/3 max-w-xl align-middle right-10 sm:flex hidden  items-center justify-center">
+            <div className="py-4 pr-4 xl:pr-0  mt-3 xl:absolute top-1/3  align-middle right-10 sm:flex hidden  items-center justify-center">
               <Button
                 variant="destructive"
                 className="w-full font-raleway sm:text-xl"
@@ -137,7 +162,7 @@ const EventDetails = () => {
           className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl"
           dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
         ></div>
-      
+
         {pocCount > 0 && (
           <div className=" px-4 pb-4 sm:pt-2">
             <h1 className="text-center font-raleway text-lg sm:text-xl">
@@ -145,12 +170,14 @@ const EventDetails = () => {
             </h1>
             <div className=" w-full justify-center sm:flex ">
               <div
-                className={`mt-4 sm:w-3/4 grid grid-cols-1 sm:grid-cols-${pocCount} gap-4`}
+                style={gridStyles}
+                className="mt-4   sm:w-3/4 grid-cols-1  grid gap-4"
               >
                 {event.name_poc_1 && event.phone_poc_1 && (
                   <a
                     href={`https://api.whatsapp.com/send?phone=91${event.phone_poc_1}`}
                     target="_blank"
+                    className="sm:pb-0"
                     rel="noopener noreferrer"
                   >
                     <div className="border p-2 rounded-md shadow cursor-pointer hover:opacity-90">
