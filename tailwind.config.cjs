@@ -66,6 +66,7 @@ module.exports = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         mont: ['"Mont"', ...fontFamily.sans], // Added Mont
         raleway: ['"Raleway"', ...fontFamily.sans], // Added Raleway
+        akira: ['"Akira"', ...fontFamily.sans], // Added Akira
       },
       keyframes: {
         "accordion-down": {
@@ -91,14 +92,19 @@ module.exports = {
           fontWeight: '800',
           fontStyle: 'normal',
           fontDisplay: 'swap', 
-          src: `url('/public/Mont.ttf') format('truetype')`, // Path to your Mont font
+          src: `url('/Mont.ttf') format('truetype')`, // Path to your Mont font
+        },
+        '@font-face': {
+          fontFamily: 'Akira',
+          fontDisplay: 'block', 
+          src: `url('/Akira.otf') format('opentype')`, // Path to your Akira font
         },
         '@font-face': {
           fontFamily: 'Raleway',
           fontWeight: '800',
           fontStyle: 'normal',
           fontDisplay: 'swap',
-          src: `url('/public/Raleway.ttf') format('truetype')`, // Path to your Raleway font
+          src: `url('/Raleway.ttf') format('truetype')`, // Path to your Raleway font
         }
       })
     },

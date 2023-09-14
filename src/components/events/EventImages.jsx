@@ -49,7 +49,7 @@ const ImageScroller = ({ imageLinks }) => {
       <img
         src={filteredImageLinks[currentImageIndex]}
         alt="Scrolling Image"
-        className={`w-full sm:max-h-64 rounded ${transitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        className={` sm:max-h-64   sm:max-w-screen-xs rounded ${transitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         {...handlers}
       />
       { filteredImageLinks.length > 1 && (
