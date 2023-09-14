@@ -1,10 +1,17 @@
 import { useLocation } from "react-router-dom";
+import { isIOS, isAndroid } from "./userAgent";
 
 function SuccessPage() {
   const location = useLocation();
   const teamId = location.state?.teamId;
   const teamName = location.state?.teamName;
-  console.log(teamId, teamName);
+  // console.log(teamId, teamName);
+
+  const appLink = isIOS()
+    ? "https://apps.apple.com/"
+    : isAndroid()
+    ? "https://play.google.com/store"
+    : "#";
 
   // Now you can use teamId and teamName in your component's rendering logic
   // ...
@@ -39,11 +46,11 @@ function SuccessPage() {
             </svg>
           </div>
           <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
-            WELCOME,
+            WELCOME {teamName}
           </h1>
-          <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
-            {teamName}
-          </h1>
+          {/* <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
+           
+          </h1> */}
           <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
             Team ID: {teamId}
           </h1>
@@ -54,9 +61,9 @@ function SuccessPage() {
 
           <p className="mt-2">
             For a list of all the exciting events,{" "}
-            <a href="URL to the events page">click here</a>. If you have
-            questions or need assistance, feel free to{" "}
-            <a href="URL to the contact page">contact us</a>.
+            <a href="/events">click here</a>. If you have questions or need
+            assistance, feel free to{" "}
+            <a href="https://www.instagram.com/crosslinks.nsut">contact us</a>.
           </p>
 
           <p className="mt-2 font-semibold">
@@ -66,7 +73,7 @@ function SuccessPage() {
 
           <ul className="list-disc pl-5 mt-2">
             <li>
-              Download <a href="URL to the app download">this app</a>.
+              Download <a href={appLink}>this app</a>.
             </li>
             <li>Register your account within the app.</li>
             <li>
