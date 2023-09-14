@@ -7,12 +7,15 @@ function SuccessPage() {
   const teamName = location.state?.teamName;
   // console.log(teamId, teamName);
 
-  const appLink = isIOS()
-    ? "https://apps.apple.com/"
-    : isAndroid()
-    ? "https://play.google.com/store"
-    : "#";
+  let appLink, appLabel;
 
+  if (isIOS()) {
+    appLink = "https://apps.apple.com/appstore-link";
+    appLabel = "Download from App Store";
+  } else  {
+    appLink = "https://play.google.com/store";
+    appLabel = "Download from Play Store";
+  }
   // Now you can use teamId and teamName in your component's rendering logic
   // ...
 
@@ -72,9 +75,9 @@ function SuccessPage() {
           </p>
 
           <ul className="list-disc pl-5 mt-2">
-            <li>
-              Download <a href={appLink}>this app</a>.
-            </li>
+          <li>
+        <a href={appLink}>{appLabel}</a>.
+      </li>
             <li>Register your account within the app.</li>
             <li>
               Follow any additional instructions provided in the app to ensure
