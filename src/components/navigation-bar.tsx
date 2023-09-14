@@ -11,11 +11,11 @@ export function NavigationBar() {
     return null; // or return a loading indicator, or keep your UI consistent while waiting.
   }
   return (
-    <div className="flex p-4 justify-between w-full  border-b border-gray-500">
+    <div className="flex p-4 justify-between w-full   border-b border-gray-500">
       {/* Left: NSUTTHON */}
       <Link to="/">
 
-          <div className="relative z-20  flex items-center p-0 m-0  ">
+          <div className="relative z-20 pt-2 flex items-center   ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
