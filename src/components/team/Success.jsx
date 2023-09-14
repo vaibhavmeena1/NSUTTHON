@@ -49,7 +49,7 @@ function SuccessPage() {
             </svg>
           </div>
           <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
-            WELCOME {teamName}
+            WELCOME <span className="capitalize  text-green-400  ">{teamName}</span>!
           </h1>
           {/* <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
            
