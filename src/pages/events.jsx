@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import EventGrid from "../components/events/eventcomponent";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -12,11 +11,17 @@ export const Events = () => {
   const initialTab = new URLSearchParams(location.search).get("day") || "1";
   const [openTab, setOpenTab] = React.useState(parseInt(initialTab));
 
+  // useEffect(() => {
+  //   // Set the tab query parameter in the URL when openTab changes
+  //   navigate(`?day=${openTab}`);
+  // }, [openTab, navigate]);
+
   useEffect(() => {
-    // Set the tab query parameter in the URL when openTab changes
-    navigate(`?day=${openTab}`);
+    // Replace the current entry in history without adding a new one
+    navigate(`?day=${openTab}`, { replace: true });
   }, [openTab, navigate]);
 
+  
   const handleTabClick = (tabNumber) => {
     setOpenTab(tabNumber);
   };
