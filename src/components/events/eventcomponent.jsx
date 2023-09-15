@@ -4,7 +4,6 @@ import TimeComponent from "../admin/Event/EditTimeFormat2";
 import EventDetails from "./EventDetailed"; // Assuming it's in the same directory
 import { useNavigate } from "react-router-dom";
 
-
 const EventGrid = ({ openTab }) => {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
@@ -46,7 +45,7 @@ const EventGrid = ({ openTab }) => {
     fetchData();
   }, []);
   const filteredEvents = events.filter((event) => event.day_number === openTab);
-  
+
   // ... [rest of the component]
 
   return (
@@ -68,6 +67,8 @@ const EventGrid = ({ openTab }) => {
               src={
                 event.banner_url_1_compressed
                   ? event.banner_url_1_compressed
+                  : event.banner_url_1
+                  ? event.banner_url_1
                   : "https://storage.googleapis.com/nsutthon/default_image-x2XbUUFkfAWKHiYyrZpNko-compressed.jpg"
               }
               alt={event.event_name}
@@ -90,7 +91,6 @@ const EventGrid = ({ openTab }) => {
           </div>
         </div>
       ))}
-     
     </div>
   );
 };
