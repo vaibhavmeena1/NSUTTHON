@@ -65,7 +65,7 @@ const EventGrid = ({ openTab }) => {
         <div
         key={event.event_id}
         // className="relative overflow-hidden rounded transition-transform hover:scale-105"
-        className="relative overflow-hidden rounded transition-transform "
+        className="relative overflow-hidden rounded transition-transform sm:hover:scale-105"
 
         onClick={() =>
           navigate(`/events/${event.event_id}`, { state: { event } })
