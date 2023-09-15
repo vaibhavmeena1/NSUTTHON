@@ -17,30 +17,30 @@ const FileUpload: React.FC<Props> = ({ onFileSelect }) => {
   useEffect(() => {
     onFileSelect(file1, file2);
   }, [file1, file2]);
-  const uploadToBackend = async (file: File, setBannerUrl: React.Dispatch<React.SetStateAction<string | null>>): Promise<string | null> => {
-    const formData = new FormData();
-    formData.append('file', file);
+  // const uploadToBackend = async (file: File, setBannerUrl: React.Dispatch<React.SetStateAction<string | null>>): Promise<string | null> => {
+  //   const formData = new FormData();
+  //   formData.append('file', file);
   
-    try {
-      const response = await axios.post('http://localhost:3000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      });
+  //   try {
+  //     const response = await axios.post('http://localhost:3000/upload', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       }
+  //     });
   
-      if (response.status === 200) {
-        const url = response.data;
-        console.log("Received URL:", url);
-        setBannerUrl(url);
-        return url;
-      }
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    }
+  //     if (response.status === 200) {
+  //       const url = response.data;
+  //       console.log("Received URL:", url);
+  //       setBannerUrl(url);
+  //       return url;
+  //     }
+  //   } catch (error) {
+  //     console.error('Error uploading file:', error);
+  //   }
   
-    setBannerUrl(null);  // set the banner URL to null in error cases
-    return null; // ensure you return null in all other cases
-  };
+  //   setBannerUrl(null);  // set the banner URL to null in error cases
+  //   return null; // ensure you return null in all other cases
+  // };
   
   
 

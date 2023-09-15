@@ -154,7 +154,7 @@ export function EventsInputForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/upload",
+        `${import.meta.env.VITE_BACKEND_URL}/upload`,
         formData,
         {
           headers: {
