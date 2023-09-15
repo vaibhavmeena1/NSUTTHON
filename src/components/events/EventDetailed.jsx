@@ -62,14 +62,11 @@ const EventDetails = () => {
         <div className="flex rounded-bl sm:border flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
           {/* Profile Image */}
           <div className=" sm:flex-none  sm:max-h-64 rounded items-center justify-center">
-            {/* <img
-              src={event.banner_url_1}
-              alt="Event Poster"
-              className="w-full  sm:max-h-64 rounded"
-            /> */}
+           
             <ImageScroller
               imageLinks={[
-                event.banner_url_1,
+                event.banner_url_1 ||
+                  "https://storage.googleapis.com/nsutthon/default_image.jpg",
                 event.banner_url_2,
                 event.banner_url_3,
               ]}
@@ -133,7 +130,7 @@ const EventDetails = () => {
         <div className="flex justify-center items-center ">
           <Button
             variant="destructive"
-            className="w-2/4  sm:hidden font-raleway sm:text-lg sm:text-xl"
+            className="w-2/4  sm:hidden font-raleway sm:text-lg "
           >
             <a
               href={event.registration_link}

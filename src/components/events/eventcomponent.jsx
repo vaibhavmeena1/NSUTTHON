@@ -55,8 +55,8 @@ const EventGrid = ({ openTab }) => {
           <div style={{ paddingBottom: "100%" }}></div>
       
           <img
-            src={event.banner_url_1_compressed}
-            alt={event.event_name}
+    src={event.banner_url_1_compressed ? event.banner_url_1_compressed : "https://storage.googleapis.com/nsutthon/default_image-x2XbUUFkfAWKHiYyrZpNko-compressed.jpg"}
+    alt={event.event_name}
             className="absolute top-0 left-0 w-full dark:border dark:border-white h-full object-cover rounded"
           />
       

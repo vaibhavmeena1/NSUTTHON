@@ -27,7 +27,6 @@ const FileUpload: React.FC<Props> = ({ onFileSelect }) => {
   //         'Content-Type': 'multipart/form-data',
   //       }
   //     });
-  
   //     if (response.status === 200) {
   //       const url = response.data;
   //       console.log("Received URL:", url);
