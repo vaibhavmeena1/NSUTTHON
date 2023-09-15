@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect ,useRef } from "react";
+import { useLocation, useParams  } from "react-router-dom";
 import TimeComponent from "../admin/Event/EditTimeFormat";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Calendar, User, Phone } from "lucide-react";
@@ -7,17 +7,43 @@ import { Separator } from "@/components/ui/separator";
 import ImageScroller from "./EventImages";
 import DOMPurify from "dompurify";
 import "react-quill/dist/quill.snow.css"; // Or another theme of your choice
+import axios from "axios";
+
+
 
 const EventDetails = () => {
   const location = useLocation();
-  const event = location.state.event;
-  const sanitizedDescription = DOMPurify.sanitize(event.description);
+  const { eventId: event_id } = useParams();
+  const [eventDetails, setEventDetails] = useState(location.state?.event || {});
+  
+  const fetchedRef = useRef(false);  // To track if data has been fetched
+
+  useEffect(() => {
+    // If eventDetails is empty and not previously fetched, fetch the event data
+    if (!eventDetails.event_id && !fetchedRef.current) {
+      const fetchEventDetails = async () => {
+        fetchedRef.current = true; // Mark as fetched
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}/events/${event_id}`
+          );
+          setEventDetails(response.data);
+        } catch (error) {
+          console.error("Error fetching the event details:", error);
+        }
+      };
+      fetchEventDetails();
+    }
+  }, [event_id]); // Remove eventDetails from dependencies
+
+
+  const sanitizedDescription = DOMPurify.sanitize(eventDetails.description);
+
   const countPOCs = () => {
-    <div className=",m "></div>;
     let count = 0;
-    if (event.name_poc_1 && event.phone_poc_1) count++;
-    if (event.name_poc_2 && event.phone_poc_2) count++;
-    if (event.name_poc_3 && event.phone_poc_3) count++;
+    if (eventDetails.name_poc_1 && eventDetails.phone_poc_1) count++;
+    if (eventDetails.name_poc_2 && eventDetails.phone_poc_2) count++;
+    if (eventDetails.name_poc_3 && eventDetails.phone_poc_3) count++;
     return count;
   };
 
@@ -45,12 +71,7 @@ const EventDetails = () => {
   }, []);
 
   const [openTab, setOpenTab] = React.useState(1);
-  {
-    /* Banner 2 */
-    /* <div className="w-full mb-4   rounded-md border dark:border-white border-black ">
-                    <img src={event.banner_url_2} alt="Event Banner" style={{ aspectRatio: "30 / 9" }} className="h-full w-full object-cover  rounded-md" />
-                </div> */
-  }
+
   return (
     <div className=" p-8 sm:p-16 md:px-24 lg:36 xl:px-72 ">
       <h1 className=" font-extrabold font-raleway  text-center pb-4 tracking-tight text-3xl  sm:text-5xl">
@@ -62,13 +83,12 @@ const EventDetails = () => {
         <div className="flex rounded-bl sm:border flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
           {/* Profile Image */}
           <div className=" sm:flex-none  sm:max-h-64 rounded items-center justify-center">
-           
             <ImageScroller
               imageLinks={[
-                event.banner_url_1 ||
+                eventDetails.banner_url_1 ||
                   "https://storage.googleapis.com/nsutthon/default_image.jpg",
-                event.banner_url_2,
-                event.banner_url_3,
+                eventDetails.banner_url_2,
+                eventDetails.banner_url_3,
               ]}
             />
           </div>
@@ -79,30 +99,30 @@ const EventDetails = () => {
               <div className="w-full items-center sm:items-start   flex flex-col  ">
                 <div className=" py-2 sm:py-4">
                   <h1 className="font-raleway flex justify-center sm:justify-normal font-extrabold text-4xl  md:text-5xl ">
-                    {event.event_name}
+                    {eventDetails.event_name}
                   </h1>
                   <p className="font-raleway flex justify-center sm:justify-normal opacity-70 text-xl sm:text-2xl ">
-                    {event.society_name}
+                    {eventDetails.society_name}
                   </p>
                 </div>
                 <div className="flex justify-center sm:justify-normal font-raleway gap-x-4 sm:gap-x-6 gap-y-1 flex-wrap ">
                   <div className="flex items-center gap-1 sm:gap-2">
                     <Calendar className="h-auto" />
                     <span className="text-lg  sm:text-2xl">
-                      Day {event.day_number}
+                      Day {eventDetails.day_number}
                     </span>
                   </div>
                   <div className="flex  gap-1  md:gap-12">
                     <Clock className="h-auto" />
                     <span className="text-lg sm:text-2xl  ">
-                      <TimeComponent timeValue={event.time} />
+                      <TimeComponent timeValue={eventDetails.time} />
                     </span>
                   </div>
-                  {event.venue && (
+                  {eventDetails.venue && (
                     <div className="flex sm:w-auto items-center sm:gap-2">
                       <MapPin className="h-auto" />
                       <span className="text-lg sm:text-2xl uppercase">
-                        {event.venue}
+                        {eventDetails.venue}
                       </span>
                     </div>
                   )}
@@ -116,7 +136,7 @@ const EventDetails = () => {
                 className="w-full font-raleway sm:text-xl"
               >
                 <a
-                  href={event.registration_link}
+                  href={eventDetails.registration_link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className=" font-raleway"
@@ -133,7 +153,7 @@ const EventDetails = () => {
             className="w-2/4  sm:hidden font-raleway sm:text-lg "
           >
             <a
-              href={event.registration_link}
+              href={eventDetails.registration_link}
               target="_blank"
               rel="noopener noreferrer"
               className="font-raleway"
@@ -152,9 +172,9 @@ const EventDetails = () => {
         </h1>
 
         {/* <h1 className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl">
-          {event.description}
+          {eventDetails.description}
         </h1> */}
-        {/* <div className=" pt-2 px-4 sm:px-8 " dangerouslySetInnerHTML={{ __html: event.description }}></div> */}
+        {/* <div className=" pt-2 px-4 sm:px-8 " dangerouslySetInnerHTML={{ __html: eventDetails.description }}></div> */}
         <div
           className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl"
           dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
@@ -170,51 +190,51 @@ const EventDetails = () => {
                 style={gridStyles}
                 className="mt-4   sm:w-3/4 grid-cols-1  grid gap-4"
               >
-                {event.name_poc_1 && event.phone_poc_1 && (
+                {eventDetails.name_poc_1 && eventDetails.phone_poc_1 && (
                   <a
-                    href={`https://api.whatsapp.com/send?phone=91${event.phone_poc_1}`}
+                    href={`https://api.whatsapp.com/send?phone=91${eventDetails.phone_poc_1}`}
                     target="_blank"
                     className="sm:pb-0"
                     rel="noopener noreferrer"
                   >
                     <div className="border p-2 rounded-md shadow cursor-pointer hover:opacity-90">
                       <p className="font-bold mb-1 flex gap-2 uppercase">
-                        <User /> {event.name_poc_1}
+                        <User /> {eventDetails.name_poc_1}
                       </p>
                       <p className=" gap-2 flex">
-                        <Phone /> {event.phone_poc_1}
+                        <Phone /> {eventDetails.phone_poc_1}
                       </p>
                     </div>
                   </a>
                 )}
-                {event.name_poc_2 && event.phone_poc_2 && (
+                {eventDetails.name_poc_2 && eventDetails.phone_poc_2 && (
                   <a
-                    href={`https://api.whatsapp.com/send?phone=91${event.phone_poc_2}`}
+                    href={`https://api.whatsapp.com/send?phone=91${eventDetails.phone_poc_2}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <div className="border p-2 rounded-md shadow cursor-pointer hover:opacity-90">
                       <p className="font-bold mb-1 flex gap-2 uppercase">
-                        <User /> {event.name_poc_2}
+                        <User /> {eventDetails.name_poc_2}
                       </p>
                       <p className=" gap-2 flex">
-                        <Phone /> {event.phone_poc_2}
+                        <Phone /> {eventDetails.phone_poc_2}
                       </p>
                     </div>
                   </a>
                 )}
-                {event.name_poc_3 && event.phone_poc_3 && (
+                {eventDetails.name_poc_3 && eventDetails.phone_poc_3 && (
                   <a
-                    href={`https://api.whatsapp.com/send?phone=91${event.phone_poc_3}`}
+                    href={`https://api.whatsapp.com/send?phone=91${eventDetails.phone_poc_3}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <div className="border p-2 rounded-md shadow cursor-pointer hover:opacity-90">
                       <p className="font-bold mb-1 flex gap-2 uppercase">
-                        <User /> {event.name_poc_3}
+                        <User /> {eventDetails.name_poc_3}
                       </p>
                       <p className=" gap-2 flex">
-                        <Phone /> {event.phone_poc_3}
+                        <Phone /> {eventDetails.phone_poc_3}
                       </p>
                     </div>
                   </a>
