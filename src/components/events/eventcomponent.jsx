@@ -55,7 +55,7 @@ const EventGrid = ({ openTab }) => {
           <div style={{ paddingBottom: "100%" }}></div>
       
           <img
-            src={event.banner_url_1}
+            src={event.banner_url_1_compressed}
             alt={event.event_name}
             className="absolute top-0 left-0 w-full dark:border dark:border-white h-full object-cover rounded"
           />
