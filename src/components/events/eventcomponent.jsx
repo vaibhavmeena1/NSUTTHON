@@ -21,23 +21,41 @@ const EventGrid = ({ openTab }) => {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null); // <-- New state
 
+  const fetchEvents = async (forceUpdate = false) => {
+    try {
+      if (!forceUpdate) {
+        // Check for cached data
+        const cachedEvents = localStorage.getItem("eventsData");
+        if (cachedEvents) {
+          return JSON.parse(cachedEvents);
+        }
+      }
+  
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/events`
+      );
+      
+      localStorage.setItem("eventsData", JSON.stringify(response.data));
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching the events:", error);
+      return [];
+    }
+  };
+  
   useEffect(() => {
     const fetchData = async () => {
+      // Fetch data from cache
       const data = await fetchEvents();
-      
-      // Sort the events based on time in ascending order
-      const sortedEvents = data.sort((a, b) => {
-        if (a.time < b.time) return -1;
-        if (a.time > b.time) return 1;
-        return 0;
-      });
-      
-      setEvents(sortedEvents);
+      setEvents(data);
+  
+      // Fetch updated data from server in the background
+      const updatedData = await fetchEvents(true);
+      setEvents(updatedData);
     };
     
     fetchData();
-  }, []); // <-- Fetch events only once when the component mounts
-
+  }, []);
   const filteredEvents = events.filter((event) => event.day_number === openTab);
   // ... [rest of the component]
 
