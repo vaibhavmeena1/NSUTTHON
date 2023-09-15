@@ -23,19 +23,19 @@ const EventGrid = ({ openTab }) => {
 
   const fetchEvents = async (forceUpdate = false) => {
     try {
-      if (!forceUpdate) {
-        // Check for cached data
-        const cachedEvents = localStorage.getItem("eventsData");
-        if (cachedEvents) {
-          return JSON.parse(cachedEvents);
-        }
-      }
+      // if (!forceUpdate) {
+      //   // Check for cached data
+      //   const cachedEvents = localStorage.getItem("eventsData");
+      //   if (cachedEvents) {
+      //     return JSON.parse(cachedEvents);
+      //   }
+      // }
   
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/events`
       );
       
-      localStorage.setItem("eventsData", JSON.stringify(response.data));
+      // localStorage.setItem("eventsData", JSON.stringify(response.data));
       return response.data;
     } catch (error) {
       console.error("Error fetching the events:", error);
