@@ -24,10 +24,10 @@ const Teamregister = () => {
                         TEAM SIZE
                     </h1>
 
-                    <div className='py-4 md:py-6 font-extrabold text-white dark:text-black'>
-                        <button onClick={() => setTeamSize(3)} className={`transition-all  rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 3 ? "bg-green-400" : "dark:bg-white bg-black  hover:bg-green-200 dark:hover:bg-green-200"}  `}>3</button>
-                        <button onClick={() => setTeamSize(4)} className={`transition-all rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 4 ? "bg-green-400" : "dark:bg-white bg-black  hover:bg-green-200 dark:hover:bg-green-200"}  `}>4</button>
-                        <button onClick={() => setTeamSize(5)} className={`transition-all rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 5 ? "bg-green-400" : "dark:bg-white bg-black  hover:bg-green-200 dark:hover:bg-green-200"}`}>5</button>
+                    <div className='py-4  md:py-9   font-extrabold text-white dark:text-black'>
+                        <button onClick={() => setTeamSize(3)} className={`transition-all  rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 3 ? "bg-green-400" : "dark:bg-white bg-black  hover:bg-green-200 dark:hover:bg-green-200"}`}><span style={{ transform: "scaleX(1.9) scaleY(0.7)" }} className=" md:text-2xl font-akira"> 3 </span> </button>
+                        <button onClick={() => setTeamSize(4)} className={`transition-all rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 4 ? "bg-green-400" : "dark:bg-white bg-black  hover:bg-green-200 dark:hover:bg-green-200"}`}><span style={{ transform: "scaleX(1.9) scaleY(0.7)" }} className=" md:text-2xl font-akira"> 4 </span></button>
+                        <button onClick={() => setTeamSize(5)} className={`transition-all rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 5 ? "bg-green-400" : "dark:bg-white bg-black  hover:bg-green-200 dark:hover:bg-green-200"}`}><span style={{ transform: "scaleX(1.9) scaleY(0.7)" }} className=" md:text-2xl  font-akira"> 5 </span></button>
                     </div>
                     <input required placeholder='TEAM NAME' value={teamName}  onChange={e => setTeamName(e.target.value.toUpperCase())} className='bg-transparent overflow-hidden cursor-text w-full text-5xl my-2 md:mb-4 outline-none md:text-7xl font-extrabold' />
                     <RegisterForm numberOfMembers={teamSize} teamName={teamName}  /> 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import { BranchSelect } from "./BranchSelect";
+import { Plus } from "lucide-react";
 
 import "../styles/transition.css";
 
@@ -73,17 +74,16 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
   }, [name, email, phone, branch, rollno]);
 
   return (
-    <div className="flex flex-col my-5  rounded-md p-5 border  space-x-4 ">
-      <div className="flex w-full">
+    <div className="flex flex-col my-5  rounded-md p-3 sm:p-5 border  space-x-4 ">
+      <div className="flex  w-full">
         <button
-          className={`rounded-full flex-none text-3xl  h-11 w-11 md:h-12 md:w-12 bg-black  dark:bg-white  transition-transform transform ${
+          className={` p-2  rounded-full flex justify-center items-center  h-10 w-10 md:h-12 md:w-12 bg-black  dark:bg-white  transition-transform transform ${
             isOpen ? "rotate-45" : ""
           }`}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="text-white  dark:text-black text-3xl   ">
-            +
-          </span>
+          <Plus className="  h-8 w-8 md:h-9  stroke-[2.5px] md:w-9  text-white dark:text-black" />
+          {/* <span className="text-white  dark:text-black text-3xl   ">+</span> */}
         </button>
         <div className="flex w-full font-mont  items-center  ">
           <input
@@ -96,13 +96,14 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
             onChange={(e) => setName(e.target.value.toUpperCase())}
             className=" outline-none font-mont w-full bg-transparent  ml-2 md:ml-6 p-1 font-bold text-lg md:text-xl "
           />
-          {/* <button
-                        className={`w-36     rounded-lg  h-10 ${isLeader ? 'bg-black text-white dark:bg-white  dark:text-black' : ' dark:border-white border border-black'} flex items-center justify-center`}
-                        onClick={() => setIsLeader(!isLeader)}
-                    >
-                        <span className="">LEADER</span>
-                    </button> */}
-        </div>
+          {index === 1 ? (
+        <button className={`sm:w-56 w-36 rounded-lg h-7 sm:h-9 sm:text-2xl font-black bg-black text-white dark:bg-white dark:text-black flex items-center justify-center break-words overflow-hidden`}>
+          <span style={{ transform: "scaleX(1.1) scaleY(0.7)" }} className="font-akira">
+            LEADER
+          </span>
+        </button>
+      ) : null}
+    </div>
       </div>
 
       <CSSTransition
