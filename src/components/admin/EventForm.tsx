@@ -34,36 +34,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const EventFormSchema = z.object({
-  event_name: z.string().min(4, "Event name must be at least 4 characters."),
-  description: z.string().optional(),
-  // rules: z.string().optional(),
-  day_number: z.number().min(1, "Day number must be at least 1.").int(),
-  time: z
-    .string()
-    .refine(
-      (time) => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/.test(time),
-      {
-        message: "Invalid time format.",
-        path: [],
-      }
-    ),
-  venue: z.string().optional(),
-  society_name: z.string().max(50),
-  pocs: z
-    .array(
-      z.object({
-        name: z.string().max(40).optional(),
-        phone: z.string().max(14).optional(),
-      })
-    )
-    .max(3, "You can add up to 3 POCs only."),
-  banner_url_1: z.string().optional(),
-  banner_url_2: z.string().optional(),
-  registration_link: z.string().optional(),
-  // event_type: z.string().optional(),
-});
-
 const modules = {
   toolbar: [
     [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -96,11 +66,51 @@ const formats = [
   "video",
 ];
 
+const EventFormSchema = z.object({
+  event_name: z.string().min(4, "Event name must be at least 4 characters."),
+  description: z.string().optional(),
+  // rules: z.string().optional(),
+  day_number: z.number().min(1, "Day number must be at least 1.").int(),
+  time: z
+    .string()
+    .refine(
+      (time) => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/.test(time),
+      {
+        message: "Invalid time format.",
+        path: [],
+      }
+    ),
+  venue: z.string().optional(),
+  society_name: z.string().max(50),
+  pocs: z
+    .array(
+      z.object({
+        name: z.string().max(40).optional(),
+        phone: z.string().max(14).optional(),
+      })
+    )
+    .max(3, "You can add up to 3 POCs only."),
+  banner_url_1: z.string().optional(),
+  banner_url_1_compressed: z.string().optional(),
+  banner_url_2: z.string().optional(),
+  banner_url_2_compressed: z.string().optional(),
+  registration_link: z.string().optional(),
+});
+
+type ImageUrls = {
+  original: string | null;
+  compressed: string | null;
+};
+
 export function EventsInputForm() {
   const [banner1Url, setBanner1Url] = useState<string | null>(null);
   const [banner2Url, setBanner2Url] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleFileSelect = (file1: File | null, file2: File | null) => {
+    setSelectedFile1(file1);
+    setSelectedFile2(file2);
+  };
   const form = useForm<z.infer<typeof EventFormSchema>>({
     resolver: zodResolver(EventFormSchema),
     defaultValues: {
@@ -116,110 +126,123 @@ export function EventsInputForm() {
 
   const [selectedFile1, setSelectedFile1] = useState<File | null>(null);
   const [selectedFile2, setSelectedFile2] = useState<File | null>(null);
-
-  const handleFileSelect = (file1: File | null, file2: File | null) => {
-    setSelectedFile1(file1);
-    setSelectedFile2(file2);
-  };
-  
-  const handleFilesUpload = async (): Promise<{ banner1Url: string | null, banner2Url: string | null }> => {
-    let banner1Response = null;
-    let banner2Response = null;
+  const handleFilesUpload = async (): Promise<{
+    banner1Urls: ImageUrls;
+    banner2Urls: ImageUrls;
+  }> => {
+    let banner1Response: ImageUrls = { original: null, compressed: null };
+    let banner2Response: ImageUrls = { original: null, compressed: null };
 
     if (selectedFile1) {
-        banner1Response = await uploadToBackend(selectedFile1, setBanner1Url);
+      banner1Response = await uploadToBackend(selectedFile1, setBanner1Url);
     }
     if (selectedFile2) {
-        banner2Response = await uploadToBackend(selectedFile2, setBanner2Url);
+      banner2Response = await uploadToBackend(selectedFile2, setBanner2Url);
     }
 
     return {
-        banner1Url: banner1Response,
-        banner2Url: banner2Response
+      banner1Urls: banner1Response,
+      banner2Urls: banner2Response,
     };
-};
+  };
+  const uploadToBackend = async (
+    file: File,
+    setBannerUrl: React.Dispatch<React.SetStateAction<string | null>>
+  ): Promise<ImageUrls> => {
+    const formData = new FormData();
+    formData.append("file", file);
 
-const uploadToBackend = async (file: File, setBannerUrl: React.Dispatch<React.SetStateAction<string | null>>): Promise<string | null> => {
-  const formData = new FormData();
-  formData.append('file', file);
-  
-  try {
-    const response = await axios.post('http://localhost:3000/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const { original, compressed } = response.data;
+        console.log("Received URL1:", original);
+
+        setBannerUrl(original); // Update the banner URL to be the original one
+        return { original, compressed };
       }
-    });
-
-    if (response.status === 200) {
-      const url = response.data;
-      console.log("Received URL1:", url);
-
-      setBannerUrl(url);  // Update the banner URL
-      return url;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      toast({
+        title: "Error",
+        variant: "destructive",
+        description: "Failed to upload the file.",
+      });
     }
-  } catch (error) {
-    console.error('Error uploading file:', error);
-  }
 
-  setBannerUrl(null);  // set the banner URL to null in error cases
-  return null; // ensure you return null in all other cases
-};
-
+    setBannerUrl(null); // set the banner URL to null in error cases
+    return { original: null, compressed: null }; // ensure you return null for both in all other cases
+  };
 
   async function onSubmit(data: z.infer<typeof EventFormSchema>) {
     setIsLoading(true);
+
+    const { banner1Urls, banner2Urls } = await handleFilesUpload();
     
-    const { banner1Url, banner2Url } = await handleFilesUpload();
-    
-    // if(!banner1Url || !banner2Url) {
-    //     toast({
-    //         title: "Error",
-    //         variant: "destructive",
-    //         description: "Image upload failed. Please try again.",
-    //     });
-    //     setIsLoading(false);
-    //     return;
-    // }
+     // Check if the selected files failed to upload
+  if ((selectedFile1 && !banner1Urls.original) ) {
+    toast({
+      title: "Error",
+      variant: "destructive",
+      description: "Selected file failed to upload. Event registration halted.",
+    });
+    setIsLoading(false);
+    return;  // Exit the function early to prevent event registration
+  }
 
     const formDataWithImages = {
-        ...data,
-        banner_url_1: banner1Url,
-        banner_url_2: banner2Url,
+      ...data,
+      banner_url_1: banner1Urls.original,
+      banner_url_1_compressed: banner1Urls.compressed,
+      banner_url_2: banner2Urls.original,
     };
 
     const token = user?.token;
     const config = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
 
     axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/registerevent`, formDataWithImages, config)
-        .then((response) => {
-            if (response.status === 200) {
-                toast({
-                    title: "Successfully added event!",
-                });
-            } else {
-                toast({
-                    title: "Error",
-                    variant: "destructive",
-                    description: response.data,
-                });
-            }
-        })
-        .catch(() => {
-            toast({
-                title: "Error",
-                variant: "destructive",
-                description: "Failed to add the event.",
-            });
-        })
-        .finally(() => {
-            setIsLoading(false);
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/registerevent`,
+        formDataWithImages,
+        config
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          toast({
+            title: "Successfully added event!",
+          });
+        } else {
+          toast({
+            title: "Error",
+            variant: "destructive",
+            description: response.data,
+          });
+        }
+      })
+      .catch(() => {
+        toast({
+          title: "Error",
+          variant: "destructive",
+          description: "Failed to add the event.",
         });
-}
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
 
   return (
     <Form {...form}>
@@ -422,9 +445,9 @@ const uploadToBackend = async (file: File, setBannerUrl: React.Dispatch<React.Se
         {/* ... similar pattern for the rest of the fields ... */}
 
         <div className="md:flex pt-24 md:pt-10 gap-12 ">
-        <div className="mt-0 sm:mt-5 ">
-          <FileUpload onFileSelect={handleFileSelect} />
-        </div>
+          <div className="mt-0 sm:mt-5 ">
+            <FileUpload onFileSelect={handleFileSelect} />
+          </div>
           <div className="w-full">
             {fields.map((field, index) => (
               <div key={field.id} className="flex mb-4 gap-5">
@@ -507,4 +530,3 @@ const uploadToBackend = async (file: File, setBannerUrl: React.Dispatch<React.Se
     </Form>
   );
 }
-
