@@ -189,15 +189,16 @@ export function EventsInputForm() {
     const { banner1Urls, banner2Urls } = await handleFilesUpload();
     
      // Check if the selected files failed to upload
-  if ((selectedFile1 && !banner1Urls.original) ) {
-    toast({
-      title: "Error",
-      variant: "destructive",
-      description: "Selected file failed to upload. Event registration halted.",
-    });
-    setIsLoading(false);
-    return;  // Exit the function early to prevent event registration
-  }
+     if ((selectedFile1 && !banner1Urls.original) || (selectedFile2 && !banner2Urls.original)) {
+      toast({
+        title: "Error",
+        variant: "destructive",
+        description: "One or more selected files failed to upload. Event registration halted.",
+      });
+      setIsLoading(false);
+      return;  // Exit the function early to prevent event registration
+    }
+    
 
     const formDataWithImages = {
       ...data,
