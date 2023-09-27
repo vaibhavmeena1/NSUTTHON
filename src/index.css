@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+.faq-container.with-gradient::after {
+  @apply block absolute inset-x-0 bottom-0 pointer-events-none;
+  content: "";
+  height: 200px; /* Increased height */
+  background: linear-gradient(to top, var(--color-faq-background, #fff) 0%, transparent); /* Start color transition immediately and use a darker color */
+}
+
+.dark .faq-container.with-gradient::after {
+  background: linear-gradient(to top, #030711 0%, transparent); /* Use a darker color and start color transition immediately */
+}
+
+
+
 @layer base {
   :root {
     --text-color: #374150;

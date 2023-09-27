@@ -20,6 +20,7 @@ import AdminLogin from "./pages/adminLogin";
 import AdminPanel from "./pages/adminPanel";
 import EventDetails from "./components/events/EventDetailed";
 import SuccessPage from "./components/team/Success";
+import { HomePage } from "./pages/Homepage";
 function App() {
   return (
 
@@ -31,7 +32,7 @@ function App() {
           <Routes>
 
 
-          {/* <Route path="/" element={<HomePage />} /> */}
+          <Route path="/" element={<HomePage />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:eventId" element={ <EventDetails/>} />
             <Route path="/leaderboard" element={ <LeaderboardPage />} />

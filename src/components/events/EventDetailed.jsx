@@ -10,7 +10,6 @@ import "react-quill/dist/quill.snow.css"; // Or another theme of your choice
 import axios from "axios";
 
 
-
 const EventDetails = () => {
   const location = useLocation();
   const { eventId: event_id } = useParams();
@@ -105,6 +104,14 @@ const EventDetails = () => {
                     {eventDetails.society_name}
                   </p>
                 </div>
+                {/* {eventDetails.venue && (
+                    <div className=" font-raleway hidden xl:flex sm:w-auto items-center sm:gap-2">
+                      <MapPin className="h-auto" />
+                      <span className="text-lg sm:text-2xl uppercase">
+                        {eventDetails.venue}
+                      </span>
+                    </div>
+                  )} */}
                 <div className="flex justify-center sm:justify-normal font-raleway gap-x-4 sm:gap-x-6 gap-y-1 flex-wrap ">
                   <div className="flex items-center gap-1 sm:gap-2">
                     <Calendar className="h-auto" />
@@ -119,27 +126,30 @@ const EventDetails = () => {
                     </span>
                   </div>
                   {eventDetails.venue && (
-                    <div className="flex sm:w-auto items-center sm:gap-2">
+                    <div className="flex font-raleway sm:w-auto items-center sm:gap-2">
                       <MapPin className="h-auto" />
                       <span className="text-lg sm:text-2xl uppercase">
                         {eventDetails.venue}
                       </span>
                     </div>
                   )}
-                </div>
+                  </div>
+                  
+                
               </div>
+            
             </div>
             {/* Registration button */}
-            <div className="py-4 pr-4 xl:pr-0  mt-3 xl:absolute top-1/3  align-middle right-10 sm:flex hidden  items-center justify-center">
+            <div className=" pr-4 py-1 xl:pr-0  mt-3 xl:absolute top-1/3  align-middle right-10 sm:flex hidden  items-center justify-center">
               <Button
                 variant="destructive"
-                className="w-full font-raleway sm:text-xl"
+                className="w-full md:p-6  font-raleway sm:text-xl"
               >
                 <a
                   href={eventDetails.registration_link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=" font-raleway"
+                  className=" md:text-2xl font-raleway"
                 >
                   Register
                 </a>
