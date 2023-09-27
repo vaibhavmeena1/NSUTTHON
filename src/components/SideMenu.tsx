@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { DropdownProfileMenu } from "@/components/admin/DropdownProfileMenu";
+import { useAuth } from "@/components/auth/auth";
+
 import {
   Sheet,
   SheetClose,
@@ -13,6 +16,11 @@ import {
 } from "@/components/ui/sheet";
 
 export function SideMenu() {
+  // render navbar only when user logged in details are fetched
+  const { user, loading } = useAuth();
+  if (loading) {
+    return null; // or return a loading indicator, or keep your UI consistent while waiting.
+  }
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -54,7 +62,15 @@ export function SideMenu() {
               </Button>
             </Link>
           </SheetClose>
+          {user && (
+
+          <SheetClose asChild>
+            <DropdownProfileMenu />
+          </SheetClose>
+                  )}
+
         </div>
+
         <div className="flex justify-center mt-4">
           <ModeToggle />
         </div>

@@ -187,18 +187,20 @@ export function EventsInputForm() {
     setIsLoading(true);
 
     const { banner1Urls, banner2Urls } = await handleFilesUpload();
-    
-     // Check if the selected files failed to upload
-     if ((selectedFile1 && !banner1Urls.original) || (selectedFile2 && !banner2Urls.original)) {
+
+    if (
+      (selectedFile1 && !banner1Urls.original) ||
+      (selectedFile2 && !banner2Urls.original)
+    ) {
       toast({
         title: "Error",
         variant: "destructive",
-        description: "One or more selected files failed to upload. Event registration halted.",
+        description:
+          "One or more selected files failed to upload. Event registration halted.",
       });
       setIsLoading(false);
-      return;  // Exit the function early to prevent event registration
+      return;
     }
-    
 
     const formDataWithImages = {
       ...data,
@@ -208,6 +210,17 @@ export function EventsInputForm() {
     };
 
     const token = user?.token;
+
+    if (!token) {
+      toast({
+        title: "Error",
+        variant: "destructive",
+        description: "Admin is not authenticated. Please login to continue.",
+      });
+      setIsLoading(false);
+      return;
+    }
+
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -222,27 +235,25 @@ export function EventsInputForm() {
       )
       .then((response) => {
         if (response.status === 200) {
-          toast({
-            title: "Successfully added event!",
-          });
+          toast({ title: "Successfully added event!" });
         } else {
-          toast({
-            title: "Error",
-            variant: "destructive",
-            description: response.data,
-          });
+          toastError(response.data);
         }
       })
-      .catch(() => {
-        toast({
-          title: "Error",
-          variant: "destructive",
-          description: "Failed to add the event.",
-        });
+      .catch((error) => {
+        toastError(error.message);
       })
       .finally(() => {
         setIsLoading(false);
       });
+  }
+
+  function toastError(description: string) {
+    toast({
+      title: "Error",
+      variant: "destructive",
+      description,
+    });
   }
 
   return (

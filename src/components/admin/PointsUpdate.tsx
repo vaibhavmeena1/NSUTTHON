@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import {PlusSquare} from "lucide-react";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast"
+import { useAuth } from "@/components/auth/auth";
 
 
 interface TeamDetailsDialogProps {
@@ -27,43 +28,67 @@ export function PointsUpdateDialog({ team_id, points, team_name, onPointsUpdated
     const teamName = team_name;
     const teamPoints = points;
     const { toast } = useToast()
+    const { user } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const updatedPoints = teamPoints + ((pointsToAdd as string) === "" || (pointsToAdd as string) === "-" ? 0 : Number(pointsToAdd));
     const handleSave = () => {
         setIsLoading(true);
+        
+        const token = user?.token || localStorage.getItem('jwt');
+        
+        if (!token) {
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: "User is not authenticated."
+            });
+            setIsLoading(false);
+            return;
+        }
+        
         axios.put(`${import.meta.env.VITE_BACKEND_URL}/teams/update-points`, {
-            team_id: team_id, // Use team_id from props
+            team_id: team_id,
             points: updatedPoints
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         })
         .then(response => {
-            if (response.status === 200) {
+            toast({
+                title: "Success!",
+                description: "Team points updated successfully!"
+            });
+            setPointsToAdd(""); // Reset the input field
+            onPointsUpdated(); // Notify parent to refetch data
+        })
+        .catch(error => {
+            console.error(error);
+            if (error.response) {
                 toast({
-                    title: "Success!",
-                    description: "Team points updated successfully!"
+                    variant: "destructive",
+                    title: "Error",
+                    description: error.response.data.message || "Failed to update points."
                 });
-                setPointsToAdd(""); // Reset the input field
-              // Notify parent to refetch data
-              onPointsUpdated();
+            } else if (error.request) {
+                toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: "No response received from the server."
+                });
             } else {
                 toast({
                     variant: "destructive",
                     title: "Error",
-                    description: "Failed to update points."
+                    description: "Something went wrong."
                 });
             }
-        })
-        .catch(error => {
-            console.error(error);
-            toast({
-                variant: "destructive",
-                title: "Error",
-                description: "Something went wrong."
-            });
         })
         .finally(() => {
             setIsLoading(false);
         });
     };
+    
 
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +102,9 @@ export function PointsUpdateDialog({ team_id, points, team_name, onPointsUpdated
             setPointsToAdd(value);
         }
     };
+
+
+
     return (
         <Dialog>
             <DialogTrigger asChild>
