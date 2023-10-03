@@ -1,67 +1,48 @@
-import { Terminal, Waves ,ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
-
-import { Faq } from "@/components/Faq";
+import { NsutthonGrid } from "../components/Homepage/Grid";
+import { Faq } from "@/components/Homepage/Faq";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 
+import { Label } from "@/components/ui/label";
 export function HomePage() {
   const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   return (
     <>
-      {/* showing stats of last year like 1800+ registreation , 40+ events , 400+ teams  */}
-      <div className="flex justify-center gap-4">
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>Create project</CardTitle>
-          </CardHeader>
-          <CardContent>esrge</CardContent>
-        </Card>
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>Create project</CardTitle>
-            <CardDescription>
-              Deploy your new project in one-click.
-            </CardDescription>
-          </CardHeader>
-          <CardContent></CardContent>
-        </Card>
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>Create project</CardTitle>
-            <CardDescription>
-              Deploy your new project in one-click.
-            </CardDescription>
-          </CardHeader>
-          <CardContent></CardContent>
-        </Card>
+      <div className="md:pt-0 md:p-16 md:pb-0 lg:px-[10vw] xl:px-[12vw] px-[6vw]">
+        <h1 className="font-extrabold font-raleway pt-16 pb-8 text-center tracking-tight text-2xl md:text-4xl">
+          NSSUTHON Rewind
+        </h1>
+        <NsutthonGrid />
+
+        <section>
+        <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
+          FAQs
+        </h1>
+        <Faq showAll={showAllFaqs} />
+        <div className="text-center -mt-7 relative">
+          <button
+            className={`transform transition-transform duration-300 p-2 rounded-full ${
+              showAllFaqs ? "rotate-180" : ""
+            } dark:bg-[#1E2B3E] bg-[#f1f5f9]`}
+            onClick={() => setShowAllFaqs(!showAllFaqs)}
+          >
+            <ChevronDown className="h-8 w-8 stroke-2" />
+          </button>
+        </div>
+        </section>
+        <footer className="flex justify-center flex-col sm:justify-end text-xs text-gray-500  py-2 opacity-80 font-georgia">
+    <span className=" text-right hidden sm:block">
+        © 2023 NSUTTHON. Developed by <a href="https://www.linkedin.com/in/vaibhavmeena1/" target="_blank" rel="noopener noreferrer">Vaibhav Meena</a>.
+    </span>
+    <div className="  sm:hidden text-center">© 2023 NSUTTHON</div>
+    <div className=" sm:hidden text-center">
+        Developed by <a href="https://www.linkedin.com/in/vaibhavmeena1/" target="_blank" rel="noopener noreferrer">Vaibhav Meena</a>
+    </div>
+</footer>
+
       </div>
-      <div className="p-8 md:p-16 lg:px-48">
-  <h1 className="font-extrabold font-raleway text-center pb-4 tracking-tight text-2xl md:text-4xl">
-    FAQs
-  </h1>
-  <Faq showAll={showAllFaqs} />
-  {/* <div className={`text-center ${showAllFaqs ? "-mt-7" : "-mt-7"} relative`}> */}
-  <div className={`text-center -mt-7  relative`}>
-
-    <button
-      className="bg-[#f1f5f9] dark:bg-[#1E2B3E]  p-2 rounded-full transition-transform duration-300"
-      onClick={() => setShowAllFaqs(!showAllFaqs)}
-      style={{ transform: showAllFaqs ? 'rotate(180deg)' : 'rotate(0deg)' }}
-    >
-      <ChevronDown className="h-8 w-8  stroke-2" />
-    </button>
-  </div>
-</div>
-
     </>
   );
 }
