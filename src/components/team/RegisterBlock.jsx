@@ -103,7 +103,6 @@ const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index 
           onClick={() => setIsOpen(!isOpen)}
         >
           <Plus className="  h-8 w-8 md:h-9  stroke-[2.5px] md:w-9  text-white dark:text-black" />
-          {/* <span className="text-white  dark:text-black text-3xl   ">+</span> */}
         </button>
         <div className="flex w-full font-mont  items-center  ">
           <input
@@ -149,14 +148,14 @@ const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index 
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value.toUpperCase());
-                  validateEmail(e.target.value.toUpperCase());
+                  // validateEmail(e.target.value.toUpperCase());
                 }}
-                onBlur={(e) => {
-                  validateEmail(e.target.value.toUpperCase());
-                }}
+                // onBlur={(e) => {
+                //   validateEmail(e.target.value.toUpperCase());
+                // }}
               />
 
-              {emailError && <p className="error-text">{emailError}</p>}
+              {/* {emailError && <p className="error-text -mt-10 -mb-10 text-sm text-red-600 opacity-60 mt-0">{emailError}</p>} */}
             
               <input
                 type="tel"

@@ -18,6 +18,8 @@ function RegisterForm({ numberOfMembers, teamName }) {
     const { toast } = useToast()
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const invalidEmailMembers = members.filter(member => !emailPattern.test(member.email));
 
 
     useEffect(() => {
@@ -41,27 +43,46 @@ function RegisterForm({ numberOfMembers, teamName }) {
         setMembers(updatedMembers);
     };
 
-    // New function to handle submission
     const submitDetails = () => {
-        // setShowPopup(true);
+        // Define the email pattern within the submit function
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    
+        // Check for team name
         if (!teamName) {
             toast({
                 variant: "destructive",
                 title: "Missing details",
                 description: "Enter team name",
             });
+            return; // exit function early
         }
-        else if (members.some(member => !member.name || !member.email || !member.phone || !member.rollno || !member.branch)) {
+    
+        // Check for any empty member fields
+        if (members.some(member => !member.name || !member.email || !member.phone || !member.rollno || !member.branch)) {
             toast({
                 variant: "destructive",
                 title: "Missing details",
                 description: "All fields are required. Please fill in missing fields.",
             });
+            return; // exit function early
         }
-        if (teamName && !members.some(member => !member.name || !member.email || !member.phone || !member.rollno || !member.branch)) {
-            setShowPopup(true);
+    
+        // Check for invalid emails
+        const invalidEmailMembers = members.filter(member => !emailPattern.test(member.email));
+    
+        if (invalidEmailMembers.length > 0) {
+            const invalidNames = invalidEmailMembers.map(m => m.name).join(', ');
+            toast({
+                variant: "destructive",
+                title: "Invalid Email",
+                description: `Ensure the email addresses for ${invalidNames} are valid.`,
+            });
+            return; // exit function early
         }
-
+    
+        // If all checks pass, proceed with the rest of the function
+        setShowPopup(true);
+    
         const teamDetails = {
             teamName: teamName,
             members: members
