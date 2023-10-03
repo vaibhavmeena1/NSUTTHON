@@ -26,7 +26,7 @@ export const Events = () => {
     setOpenTab(tabNumber);
   };
   return (
-    <div className=" p-8 md:p-16 lg:px-48 ">
+      <div className=" md:px-[8vw] lg:px-[10vw] xl:px-[13vw] px-[8vw] pt-8 md:pt-16">
       <h1 className=" font-extrabold font-raleway  text-center pb-4 tracking-tight text-3xl  md:text-5xl">
         EVENTS
       </h1>

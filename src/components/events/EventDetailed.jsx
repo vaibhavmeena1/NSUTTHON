@@ -143,7 +143,7 @@ const EventDetails = () => {
             <div className=" pr-4 py-1 xl:pr-0  mt-3 xl:absolute top-1/3  align-middle right-10 sm:flex hidden  items-center justify-center">
               <Button
                 variant="destructive"
-                className="w-full md:p-6  font-raleway sm:text-xl"
+                className="w-full md:p-5  font-raleway "
               >
                 <a
                   href={eventDetails.registration_link}

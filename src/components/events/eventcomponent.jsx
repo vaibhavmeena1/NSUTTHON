@@ -49,7 +49,7 @@ const EventGrid = ({ openTab }) => {
   // ... [rest of the component]
 
   return (
-    <div className="grid grid-cols-2  md:grid-cols-4 gap-4 md:gap-7">
+    <div className="grid grid-cols-2  md:grid-cols-4 gap-4 xl:gap-7">
       {filteredEvents.map((event) => (
         <div
           key={event.event_id}
@@ -76,7 +76,7 @@ const EventGrid = ({ openTab }) => {
             />
 
             {/* Time component positioned over the image */}
-            <div className="absolute bottom-0 right-2 sm:right-4 dark:mb-[1px] bg-white dark:border-b-0 dark:border-white   border dark:bg-[#03050a] px-1 sm:px-2 py-0.5 sm:py-1 rounded-t-md">
+            <div className="absolute top-0 right-2 sm:right-4 dark:mt-[1px] bg-white dark:border-b-1 dark:border-white   border dark:bg-[#03050a] px-1 sm:px-2 py-0.5 sm:py-1 rounded-b-md">
               <TimeComponent timeValue={event.time} className="" />
             </div>
           </div>
