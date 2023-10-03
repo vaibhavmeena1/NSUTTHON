@@ -25,7 +25,7 @@ export function HomePage() {
           <button
             className={`transform transition-transform duration-300 p-2 rounded-full ${
               showAllFaqs ? "rotate-180" : ""
-            } dark:bg-[#1E2B3E] bg-[#f1f5f9]`}
+            } dark:bg-[hsl(0,0%,14.9%)] bg-[hsl(0,0%,89.9%)]`}  
             onClick={() => setShowAllFaqs(!showAllFaqs)}
           >
             <ChevronDown className="h-8 w-8 stroke-2" />
