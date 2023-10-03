@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , forwardRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { BranchSelect } from "./BranchSelect";
 import { Plus } from "lucide-react";
 import {Input} from "@/components/ui/input";
 import "../styles/transition.css";
+import clsx from "clsx";
 
 import {
   Select,
@@ -24,7 +25,7 @@ import {
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const RegisterBlock = ({ member, saveMemberDetails, index }) => {
+const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index }, ref) => {
   const options = [
     {
       label: "Main Campus",
@@ -93,8 +94,8 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
   }, [name, email, phone, branch, rollno]);
 
   return (
-    <div className="flex flex-col my-5  rounded-md p-3 sm:p-5 border  space-x-4 ">
-      <div className="flex  w-full">
+    <div ref={ref} className={clsx("flex flex-col my-5 rounded-md p-3 sm:p-5 border space-x-4", className)}>
+    <div className="flex  w-full">
         <button
           className={` p-2  rounded-full flex justify-center items-center  h-10 w-10 md:h-12 md:w-12 bg-black  dark:bg-white  transition-transform transform ${
             isOpen ? "rotate-45" : ""
@@ -210,6 +211,7 @@ const RegisterBlock = ({ member, saveMemberDetails, index }) => {
         }
       </CSSTransition>
     </div>
-  );
-};
+ );
+});
+
 export default RegisterBlock;

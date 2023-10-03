@@ -9,6 +9,8 @@ import { TransitionGroup } from 'react-transition-group';
 import { PopupDialog } from './Popup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Transition } from "@headlessui/react";
+
 
 function RegisterForm({ numberOfMembers, teamName }) {
     // Array to store details of each member
@@ -111,29 +113,40 @@ function RegisterForm({ numberOfMembers, teamName }) {
             setShowPopup(false);
         }
     };
-
-
-
     return (
         <div>
             {members.map((member, index) => (
-                <RegisterBlock
+                <Transition
+                    as={React.Fragment}
                     key={index}
-                    member={member}
-                    saveMemberDetails={(newMember) => saveMemberDetails(index, newMember)}
-                    index={index + 1}
-                />
+                    appear={true}
+                    show={true}
+                    enter="transform transition ease-in-out duration-500"
+                    enterFrom="translate-x-full opacity-0"
+                    enterTo="translate-x-0 opacity-100"
+                >
+                    <div style={{ transitionDelay: `${index * 100}ms` }}>
+                        <RegisterBlock
+                            member={member}
+                            saveMemberDetails={(newMember) => saveMemberDetails(index, newMember)}
+                            index={index + 1}
+                        />
+                    </div>
+                </Transition>
             ))}
-            <Button className="w-full font-bold  font-raleway text-xl py-6" onClick={submitDetails} >SUBMIT</Button>
+            <Button className="w-full font-bold font-raleway text-xl py-6" onClick={submitDetails}>
+                SUBMIT
+            </Button>
 
-            {showPopup &&
+            {showPopup && (
                 <PopupDialog
-                    teamName={teamName} members={members}
+                    teamName={teamName}
+                    members={members}
                     onResponse={handlePopupResponse}
                 />
-            }
+            )}
         </div>
     );
 }
-;
+
 export default RegisterForm;
