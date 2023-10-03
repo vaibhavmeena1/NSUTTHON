@@ -124,7 +124,7 @@ function RegisterForm({ numberOfMembers, teamName }) {
                     index={index + 1}
                 />
             ))}
-            <Button className="w-full bg-green-400 font-semibold text-xl py-6" onClick={submitDetails} >SUBMIT</Button>
+            <Button className="w-full font-bold  font-raleway text-xl py-6" onClick={submitDetails} >SUBMIT</Button>
 
             {showPopup &&
                 <PopupDialog
