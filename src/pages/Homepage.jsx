@@ -72,7 +72,7 @@ export function HomePage() {
 
         <section
   style={styles.section}
-  className="  h-1/2 w-full flex flex-col justify-end items-center "
+  className="  h-screen w-full flex flex-col justify-end items-center "
 >
   <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
     FAQs
