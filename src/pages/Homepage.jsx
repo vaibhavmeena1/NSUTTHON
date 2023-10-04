@@ -10,7 +10,7 @@ export function HomePage() {
 
   return (
     <>
-      <section className="pt-1 h-[95hv]    overflow-hidden">
+      <section className="pt-1 h-screen    overflow-hidden">
         <HeroSection />
       </section>
 
