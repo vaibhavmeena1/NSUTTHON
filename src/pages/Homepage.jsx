@@ -25,11 +25,14 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="md:h-screen">
+        <section className="h-screen  w-full flex  flex-col justify-center items-center ">
           <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
             FAQs
           </h1>
+          <div className="w-full">
           <Faq showAll={showAllFaqs} />
+
+          </div>
           <div className="text-center -mt-7 relative">
             <button
               className={`transform transition-transform duration-300 p-2 rounded-full ${
