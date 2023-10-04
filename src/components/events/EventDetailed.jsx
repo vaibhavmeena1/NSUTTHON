@@ -142,16 +142,15 @@ const EventDetails = () => {
             {/* Registration button */}
             <div className=" pr-4 py-1 xl:pr-0  mt-3 xl:absolute top-1/3  align-middle right-10 sm:flex hidden  items-center justify-center">
               <Button
-                variant="destructive"
-                className="w-full md:p-5  font-raleway "
+                className="w-full md:p-5  opacity-90 font-raleway "
               >
                 <a
                   href={eventDetails.registration_link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=" md:text-2xl font-raleway"
+                  className=" md:text-xl font-raleway"
                 >
-                  Register
+                  REGISTER
                 </a>
               </Button>
             </div>
@@ -159,16 +158,15 @@ const EventDetails = () => {
         </div>
         <div className="flex justify-center items-center ">
           <Button
-            variant="destructive"
             className="w-2/4  sm:hidden font-raleway sm:text-lg "
           >
             <a
               href={eventDetails.registration_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-raleway"
+              className="font-raleway text-lg"
             >
-              Register
+              REGISTER
             </a>
           </Button>
         </div>
@@ -181,12 +179,9 @@ const EventDetails = () => {
           ABOUT THE EVENT
         </h1>
 
-        {/* <h1 className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl">
-          {eventDetails.description}
-        </h1> */}
-        {/* <div className=" pt-2 px-4 sm:px-8 " dangerouslySetInnerHTML={{ __html: eventDetails.description }}></div> */}
+
         <div
-          className="mb-4 py-2 px-4 sm:px-8 text-md sm:text-xl"
+          className="mb-4 py-2 px-4 overflow-hidden sm:px-8 text-md sm:text-xl"
           dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
         ></div>
 

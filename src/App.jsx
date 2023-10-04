@@ -12,6 +12,8 @@ import { AlertDialogDemo } from "./components/AlertDialogDemo";
 // import HomePage from "./pages/homePage";
 import { Toaster } from "./components/ui/toaster"
 import { AuthProvider } from "./components/auth/auth";
+import { MarqueeProvider } from './components/auth/MarqueeContext';
+
 import { RequireAuth } from "./components/auth/RequireAuth";
 import LeaderboardPage from "./pages/leaderboard";
 import { Events } from "./pages/events";
@@ -26,6 +28,8 @@ function App() {
 
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <AuthProvider>
+      <MarqueeProvider>
+
         <Router>
           <Toaster />
           <NavigationBar />
@@ -46,6 +50,8 @@ function App() {
            
           </Routes>
         </Router>
+        </MarqueeProvider>
+
       </AuthProvider>
     </ThemeProvider>
   );
