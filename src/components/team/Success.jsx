@@ -1,7 +1,22 @@
 import { useLocation } from "react-router-dom";
 import { isIOS, isAndroid } from "./userAgent";
+import BounceLoader from "react-spinners/BounceLoader";
+import React, { useState, useEffect } from 'react';
 
 function SuccessPage() {
+  const [showLoader, setShowLoader] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+      setShowContent(true);
+    }, 1000); // Hide after 1 second
+
+    return () => clearTimeout(timer); // Cleanup the timer if the component is unmounted
+  }, []);
+
+
   const location = useLocation();
   const teamId = location.state?.teamId;
   const teamName = location.state?.teamName;
@@ -12,7 +27,7 @@ function SuccessPage() {
   if (isIOS()) {
     appLink = "https://apps.apple.com/appstore-link";
     appLabel = "Download from App Store";
-  } else  {
+  } else {
     appLink = "https://play.google.com/store";
     appLabel = "Download from Play Store";
   }
@@ -28,8 +43,15 @@ function SuccessPage() {
         <div className="relative hidden h-full flex-col p-10 lg:flex col-span-2">
           <div className="absolute inset-0 bg-zinc-900"></div>
         </div>
+        {showLoader && (
+        <div className="flex justify-center items-center gap-1.5 text-xl font-raleway col-span-5">
+          <BounceLoader color="#dc2628" speedMultiplier={1.2} size={25} />
+          Loading..
+        </div>
+      )}
+            {showContent && (
 
-        <div className="p-6 md:p-8 lg:pl-20 col-span-5">
+        <div className="p-6  md:p-8 lg:pl-20 col-span-5">
           <div className="  flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +71,11 @@ function SuccessPage() {
             </svg>
           </div>
           <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
-            WELCOME <span className="capitalize  bg-primary text-primary-foreground hover:bg-primary/90  ">{teamName}</span>!
+            WELCOME{" "}
+            <span className="capitalize  bg-primary text-primary-foreground hover:bg-primary/90  ">
+              {teamName}
+            </span>
+            !
           </h1>
           {/* <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
            
@@ -75,9 +101,9 @@ function SuccessPage() {
           </p>
 
           <ul className="list-disc pl-5 mt-2">
-          <li>
-        <a href={appLink}>{appLabel}</a>.
-      </li>
+            <li>
+              <a href={appLink}>{appLabel}</a>.
+            </li>
             <li>Register your account within the app.</li>
             <li>
               Follow any additional instructions provided in the app to ensure
@@ -93,6 +119,7 @@ function SuccessPage() {
 
           <p className="mt-4">Thank you for being a part of our community!</p>
         </div>
+        )}
       </div>
     </div>
   );

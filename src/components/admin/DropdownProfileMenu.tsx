@@ -58,9 +58,9 @@ export function DropdownProfileMenu() {
         <span>Manage Events</span>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
-      <DropdownMenuItem onSelect={logout}>
+      <DropdownMenuItem className="text-red-600" onSelect={logout}>
         <LogOut className="mr-2 h-4 w-4" />
-        <span>Log out</span>
+        <span className="">Log out</span>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

@@ -8,8 +8,13 @@ import React, { memo, useCallback } from "react";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
+import { useInView } from "react-intersection-observer";
 
 export function Faq({ showAll }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Ensures the animation happens only once
+    threshold: 0.1, // Percentage of element in view to trigger
+  });
   const allFaqs = useCallback(
     [
       {
@@ -64,9 +69,7 @@ export function Faq({ showAll }) {
     []
   );
 
-  // // Define the classes
-  // const hiddenClass = "max-h-10 overflow-hidden transition-max-height duration-500 ease-in-out";
-  // const shownClass = "max-h-full transition-max-height duration-500 ease-in-out";
+
   const containerClass = clsx("faq-container relative overflow-hidden", {
     "with-gradient": !showAll,
   });
@@ -77,6 +80,7 @@ export function Faq({ showAll }) {
 
   return (
     <div
+    ref={ref} // Attach the ref here
       className={`${containerClass} relative pb-3 border-b-4 overflow-hidden`}
     >
       <Accordion type="single" collapsible className="w-full">
@@ -87,7 +91,9 @@ export function Faq({ showAll }) {
             key={faq.id}
           >
             <AccordionTrigger>{faq.question}</AccordionTrigger>
-            <AccordionContent>{faq.answer}</AccordionContent>
+            <AccordionContent>
+  <div dangerouslySetInnerHTML={{ __html: faq.answer }}></div>
+</AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>

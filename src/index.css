@@ -16,6 +16,22 @@
 }
 
 
+/* Custom font import */
+@font-face {
+  font-family: 'TransducerTest';
+  src: url('/TransducerTest-Black-Regular.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal ;
+}
+
+/* In your CSS or SCSS file */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&display=swap');
+
+
 
 @layer base {
   :root {

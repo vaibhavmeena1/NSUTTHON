@@ -4,9 +4,14 @@ import { SideMenu } from "@/components/SideMenu";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth";
 import { DropdownProfileMenu } from "@/components/admin/DropdownProfileMenu";
+import { useMarquee } from '@/components/auth/MarqueeContext';
+
+
 export function NavigationBar() {
   // render navbar only when user logged in details are fetched
   const { user, loading } = useAuth();
+  const { setIsMarqueePaused } = useMarquee();
+
   if (loading) {
     return null; // or return a loading indicator, or keep your UI consistent while waiting.
   }
@@ -104,8 +109,8 @@ export function NavigationBar() {
         <div className="hidden  space-x-4 items-center sm:flex">
           <ModeToggle />
         </div>
-        <div className="sm:hidden">
-          <SideMenu />
+        <div className="sm:hidden" onClick={() => setIsMarqueePaused(prev => !prev)}>
+            <SideMenu />
         </div>
       </div>
     </div>
