@@ -17,7 +17,7 @@ import {
 
 export function NsutthonGrid({}) {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Ensures the animation happens only once
+    triggerOnce: false, // Ensures the animation happens only once
     threshold: 0.1, // Percentage of element in view to trigger
   });
 
@@ -83,7 +83,7 @@ return (
       )}
       <CardContent className="flex justify-between items-baseline">
         <div className="text-2xl pt-6 font-bold">
-          {inView && <CountUp start={0} end={450} duration={2} />}+
+          {inView && <CountUp start={0} end={450} duration={3} />}+
         </div>
         <Users2 className="h-4 w-4 opacity-75" />
       </CardContent>
@@ -103,7 +103,7 @@ return (
       )}
         <CardContent className="flex justify-between items-baseline">
           <div className="text-2xl pt-6 font-bold">
-            {inView && <CountUp start={1000} end={1500} duration={2} />}+
+            {inView && <CountUp start={1000} end={1500} duration={3} />}+
           </div>
           <User2 className="h-4 w-4 opacity-75" />
         </CardContent>
@@ -121,7 +121,7 @@ return (
       )}
         <CardContent className="flex justify-between items-baseline">
           <div className="text-2xl pt-6 font-bold">
-            {inView && <CountUp start={0} end={40} duration={3} />}+
+            {inView && <CountUp start={0} end={40} duration={4} />}+
           </div>
           <Swords className="h-4 w-4 opacity-75" />
         </CardContent>

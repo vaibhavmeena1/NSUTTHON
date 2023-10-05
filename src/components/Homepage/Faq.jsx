@@ -12,8 +12,8 @@ import { useInView } from "react-intersection-observer";
 
 export function Faq({ showAll }) {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Ensures the animation happens only once
-    threshold: 0.1, // Percentage of element in view to trigger
+    triggerOnce: false, // Ensures the animation happens only once
+    threshold: 0.6, // Percentage of element in view to trigger
   });
   const allFaqs = useCallback(
     [
@@ -74,9 +74,9 @@ export function Faq({ showAll }) {
     "with-gradient": !showAll,
   });
   const hiddenClass =
-    "opacity-0 max-h-0 overflow-hidden transition-all duration-500 ease-in-out";
+    "opacity-0 max-h-0 overflow-hidden transition-all duration-500 ease-in-out ";
   const shownClass =
-    "opacity-100 max-h-full transition-all duration-500 ease-in-out";
+    "opacity-100 max-h-full transition-all duration-1000 ease-in-out";
 
   return (
     <div
@@ -87,7 +87,7 @@ export function Faq({ showAll }) {
         {allFaqs.map((faq, index) => (
           <AccordionItem
             value={faq.id}
-            className={showAll || index < 5 ? shownClass : hiddenClass}
+            className={inView ? (showAll || index < 5 ? shownClass : hiddenClass) : hiddenClass}
             key={faq.id}
           >
             <AccordionTrigger>{faq.question}</AccordionTrigger>
