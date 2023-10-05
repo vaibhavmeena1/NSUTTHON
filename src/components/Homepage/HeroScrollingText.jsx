@@ -4,10 +4,7 @@ import times from "lodash.times";
 import LogoWhite from "./Logowhite";
 import { Button } from "../ui/button";
 import { useMarquee } from "@/components/auth/MarqueeContext";
-
-import "../styles/transition.css";
-import { CSSTransition } from "react-transition-group";
-import { useSpring, animated } from 'react-spring';
+// import { ReactComponent as SVGlogoWhite} from  "../../../public/nsutthonw.svg";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,7 +21,7 @@ const HeroSection = () => {
         exit: {
             scale: 3,
             opacity: 0,
-            y: 0, // Keep this at 0 so the logo doesn't shift vertically.
+            y:  40, // Keep this at 0 so the logo doesn't shift vertically.
             transition: {
                 duration: 0.6
             }
@@ -46,17 +43,23 @@ const HeroSection = () => {
     //     window.location.href = '/registration-page-url';
     //   }, 500);
     // };
-
     const handleRegisterClick = () => {
-        // Start the animation
-        setAnimateX(true);
-    
-        // After animation is complete, redirect
-        setTimeout(() => {
-            window.location.href = "/register";
-        }, 500); // This should match the duration in your exit transition
-    };
-    
+      // Start the animation
+      setAnimateX(true);
+  
+      // Vibrate for 200ms if supported
+      if ("vibrate" in navigator) {
+          navigator.vibrate(200);
+      } else {
+          console.log("Vibration API is not supported by your browser");
+      }
+      
+      // After animation is complete, redirect
+      setTimeout(() => {
+          window.location.href = "/register";
+      }, 500); // This should match the duration in your exit transition
+  };
+  
     
   
   const names = [
@@ -87,9 +90,11 @@ const HeroSection = () => {
     "SHAKESJEER",
     "VENATUS",
     "NSS NSUT",
+    "Crosslinks",
     "Shatranj",
     "QUIZ CLUB",
     "Crosslinks",
+    "CROSSLINKS"
 
     
   ];
@@ -122,7 +127,7 @@ const HeroSection = () => {
   }, [totalDisplayNames]);
 
   // This will depend on the height of your marquee (including the space-y-2 and the content inside)
-  const estimatedMarqueeHeight = 90; // This value will need to be adjusted based on your design
+  const estimatedMarqueeHeight = 95; // This value will need to be adjusted based on your design
   const estimatedMarqueeHeightMob = 70; // This value will need to be adjusted based on your design
 
   // Calculate how many marquees are required
@@ -229,6 +234,7 @@ const HeroSection = () => {
             exit="exit"
             variants={xVariants}
         >
+            {/* <SVGlogoWhite className="opacity-95 w-80  origin-center z-30" /> */}
               <LogoWhite className="opacity-95 w-80  origin-center z-30" />
         </motion.div>
     )}
@@ -251,7 +257,7 @@ const HeroSection = () => {
         }`}
       >
         {renderMarqueesMob()}
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/3 z-10 flex flex-col items-center ">
+        <div className="absolute top-[40%] top left-1/2 transform -translate-x-1/2 -translate-y-1/3 z-10 flex flex-col items-center ">
         
         
               <AnimatePresence>

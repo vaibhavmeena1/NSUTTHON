@@ -44,6 +44,8 @@ const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index 
         { label: "BT", value: "BT" },
         { label: "B.Design", value: "B.Design" },
         { label: "B.FTech", value: "B.FTech" },
+        { label: "BBA", value: "BBA" },
+
       ],
     },
     {
@@ -61,6 +63,12 @@ const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index 
         { label: "CE", value: "CE" },
         { label: "GI", value: "GI" },
         { label: "B.Arch", value: "B.Arch" },
+      ],
+    },
+    {
+      options: [
+        { label: "Others", value: "Others" },
+
       ],
     },
   ];
@@ -159,7 +167,7 @@ const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index 
             
               <input
                 type="tel"
-                maxLength="12"
+                maxLength="10"
                 placeholder="PHONE NO"
                 className="outline-none bg-transparent p-1  font-bold w-full text-lg md:text-xl"
                 value={phone}
@@ -201,7 +209,7 @@ const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index 
                 placeholder="ROLL NO"
                 value={rollno}
                 required
-                maxLength="15"
+                maxLength="16"
                 onChange={(e) => setRollno(e.target.value.toUpperCase())}
                 className="outline-none bg-transparent p-1   font-bold w-full  text-lg md:text-xl"
               />

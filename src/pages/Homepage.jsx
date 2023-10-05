@@ -7,10 +7,19 @@ import HeroSection from "@/components/Homepage/HeroScrollingText";
 import { Label } from "@/components/ui/label";
 export function HomePage() {
   const [showAllFaqs, setShowAllFaqs] = useState(false);
+  const navbarHeight = 56; // Height of your navbar in pixels
+  const [vh, setVh] = useState(window.innerHeight - navbarHeight);
 
   useEffect(() => {
-    // Move the query inside the useEffect
-    const snapContainer = document.querySelector('.snap-container');
+    const handleResize = () => setVh(window.innerHeight - navbarHeight);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const snapContainer = document.querySelector(".snap-container");
 
     if (!snapContainer) {
       console.error("snapContainer is null");
@@ -23,23 +32,48 @@ export function HomePage() {
       timeoutId = setTimeout(() => {
         const currentScroll = snapContainer.scrollTop;
         const snapHeight = window.innerHeight;
-
         const snapIndex = Math.round(currentScroll / snapHeight);
-        snapContainer.scrollTo(0, snapIndex * snapHeight);
-      }, 100);
+        const targetScroll = snapIndex * snapHeight;
+
+        const animateScroll = (
+          startTime,
+          currentTime,
+          startScroll,
+          endScroll
+        ) => {
+          const runtime = currentTime - startTime;
+          const progress = Math.min(runtime / 1000, 1);
+          const ease =
+            progress < 0.5
+              ? 2 * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+          snapContainer.scrollTop =
+            startScroll + (endScroll - startScroll) * ease;
+
+          if (runtime < 1000) {
+            requestAnimationFrame((timestamp) =>
+              animateScroll(startTime, timestamp, startScroll, endScroll)
+            );
+          }
+        };
+
+        requestAnimationFrame((timestamp) =>
+          animateScroll(timestamp, timestamp, currentScroll, targetScroll)
+        );
+      }, 500);
     };
 
-    snapContainer.addEventListener('scroll', onScroll);
+    snapContainer.addEventListener("scroll", onScroll);
 
     return () => {
-      snapContainer.removeEventListener('scroll', onScroll);
+      snapContainer.removeEventListener("scroll", onScroll);
     };
-}, []); // The empty dependency array ensures this runs after the first render and not again
-
+  }, []);
 
   const styles = {
     snapContainer: {
-      height: "100vh",
+      height: `${vh}px`,
       overflowY: "scroll",
       scrollSnapType: "y mandatory",
     },
@@ -51,71 +85,70 @@ export function HomePage() {
   return (
     <div style={styles.snapContainer}>
       <section
-        style={styles.section}
-        className="pt-1 h-screen    overflow-hidden"
+        style={{ ...styles.section, height: `${vh}px` }}
+        className="pt-1   border  overflow-hidden"
       >
         <HeroSection />
       </section>
 
-      <div className="md:pt-0 md:p-16 md:pb-0 lg:px-[10vw] xl:px-[12vw] px-[6vw]">
-        <section
-          style={styles.section}
-          className="h-screen w-full flex  justify-center items-center flex-col "
-        >
-          <h1 className="font-extrabold mb-14 font-raleway text-center tracking-tight text-2xl md:text-4xl">
-            NSUTTHON: Last Year's Highlights
-          </h1>
-          <div className=" w-full">
-            <NsutthonGrid />
-          </div>
-        </section>
+      <section
+        style={{ ...styles.section, height: `${vh}px` }}
+        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   |   border   w-full  flex  gap-14 justify-center items-center flex-col "
+      >
+        <h1 className="font-extrabold  font-raleway text-center tracking-tight text-2xl md:text-4xl">
+          NSUTTHON: Last Year's Highlights
+        </h1>
+        <div className=" w-full">
+          <NsutthonGrid />
+        </div>
+      </section>
 
-        <section
-  style={styles.section}
-  className="  h-screen w-full flex flex-col justify-center items-center "
->
-  <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
-    FAQs
-  </h1>
-  <div className="w-full">
-    <Faq showAll={showAllFaqs} />
-  </div>
-  <div className="text-center -mt-7 relative">
-    <button
-      className={`transform transition-transform duration-300 p-2 rounded-full ${
-        showAllFaqs ? "rotate-180" : ""
-      } dark:bg-[hsl(0,0%,14.9%)] bg-[hsl(0,0%,89.9%)]`}
-      onClick={() => setShowAllFaqs(!showAllFaqs)}
-    >
-      <ChevronDown className="h-8 w-8 stroke-2" />
-    </button>
-  </div>
-  <footer className="flex justify-center flex-col sm:justify-end mb-10 text-xs text-gray-500 py-2 opacity-80 font-georgia">
-    <span className="text-right hidden sm:block">
-      © 2023 NSUTTHON. Developed by{" "}
-      <a
-        href="https://www.linkedin.com/in/vaibhavmeena1/"
-        target="_blank"
-        rel="noopener noreferrer"
+      <section
+        style={{ ...styles.section, height: `${vh}px` }}
+        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   |  w-full flex flex-col justify-center items-center "
       >
-        Vaibhav Meena
-      </a>
-      .
-    </span>
-    <div className="sm:hidden text-center">© 2023 NSUTTHON</div>
-    <div className="sm:hidden text-center">
-      Developed by{" "}
-      <a
-        href="https://www.linkedin.com/in/vaibhavmeena1/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Vaibhav Meena
-      </a>
-    </div>
-  </footer>
-</section>
-{/* 
+        <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
+          FAQs
+        </h1>
+        <div className="w-full">
+          <Faq showAll={showAllFaqs} />
+        </div>
+        <div className="text-center -mt-7 relative">
+          <button
+            className={`transform transition-transform duration-300 p-2 rounded-full ${
+              showAllFaqs ? "rotate-180" : ""
+            } dark:bg-[hsl(0,0%,14.9%)] bg-[hsl(0,0%,89.9%)]`}
+            onClick={() => setShowAllFaqs(!showAllFaqs)}
+          >
+            <ChevronDown className="h-8 w-8 stroke-2" />
+          </button>
+        </div>
+        <footer className="flex justify-center flex-col sm:justify-end mb-10 text-xs text-gray-500 py-2 opacity-80 font-georgia">
+          <span className="text-right hidden sm:block">
+            © 2023 NSUTTHON. Developed by{" "}
+            <a
+              href="https://www.linkedin.com/in/vaibhavmeena1/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vaibhav Meena
+            </a>
+            .
+          </span>
+          <div className="sm:hidden text-center">© 2023 NSUTTHON</div>
+          <div className="sm:hidden text-center">
+            Developed by{" "}
+            <a
+              href="https://www.linkedin.com/in/vaibhavmeena1/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vaibhav Meena
+            </a>
+          </div>
+        </footer>
+      </section>
+      {/* 
         <footer className="flex justify-center flex-col sm:justify-end text-xs text-gray-500  py-2 opacity-80 font-georgia">
           <span className=" text-right hidden sm:block">
             © 2023 NSUTTHON. Developed by{" "}
@@ -140,7 +173,6 @@ export function HomePage() {
             </a>
           </div>
         </footer> */}
-      </div>
     </div>
   );
 }
