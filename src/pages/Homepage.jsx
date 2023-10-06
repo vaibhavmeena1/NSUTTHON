@@ -10,13 +10,13 @@ export function HomePage() {
   const navbarHeight = 56; // Height of your navbar in pixels
   const [vh, setVh] = useState(window.innerHeight - navbarHeight);
 
-  useEffect(() => {
-    const handleResize = () => setVh(window.innerHeight - navbarHeight);
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+//  useEffect(() => {
+//    const handleResize = () => setVh(window.innerHeight - navbarHeight);
+  //  window.addEventListener("resize", handleResize);
+//    return () => {
+ //     window.removeEventListener("resize", handleResize);
+   // };
+  // }, []);
 
   useEffect(() => {
     const snapContainer = document.querySelector(".snap-container");
@@ -83,17 +83,17 @@ export function HomePage() {
   };
 
   return (
-    <div style={styles.snapContainer}>
+    <div >
       <section
-        style={{ ...styles.section, height: `${vh}px` }}
-        className="pt-1   overflow-hidden"
+        
+        className="pt-1 h-screen  overflow-hidden"
       >
         <HeroSection />
       </section>
 
       <section
-        style={{ ...styles.section, height: `${vh}px` }}
-        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   |      w-full  flex  gap-14 justify-center items-center flex-col "
+        
+        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   |  py-6    w-full  flex  gap-14 justify-center items-center flex-col "
       >
         <h1 className="font-extrabold  font-raleway text-center tracking-tight text-2xl md:text-4xl">
           NSUTTHON: Last Year's Highlights
@@ -104,8 +104,8 @@ export function HomePage() {
       </section>
 
       <section
-        style={{ ...styles.section, height: `${vh}px` }}
-        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   |  w-full flex flex-col justify-center items-center "
+        
+        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   | py-6  w-full flex flex-col justify-center items-center "
       >
         <div className=" flex-grow w-full flex flex-col justify-center items-center">
           <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
