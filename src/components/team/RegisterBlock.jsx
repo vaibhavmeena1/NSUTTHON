@@ -105,7 +105,7 @@ const RegisterBlock = forwardRef(({ className, member, saveMemberDetails, index 
     <div ref={ref} className={clsx("flex flex-col my-5 rounded-md p-3 sm:p-5 border space-x-4", className)}>
     <div className="flex  w-full">
         <button
-          className={` p-2  rounded-full flex justify-center items-center  h-10 w-10 md:h-12 md:w-12 bg-black  dark:bg-white  transition-transform transform ${
+          className={` p-2  active:scale-95 rounded-full flex justify-center items-center  h-10 w-10 md:h-12 md:w-12 bg-black  dark:bg-white  transition-transform transform ${
             isOpen ? "rotate-45" : ""
           }`}
           onClick={() => setIsOpen(!isOpen)}

@@ -102,8 +102,7 @@ function RegisterForm({ numberOfMembers, teamName }) {
                 .then(res => {
                     if (res.status === 201) {
                         const { teamId: receivedTeamId } = res.data;
-                        console.log("Team ID received:", receivedTeamId)
-                        console.log("Team name:", teamName)
+                     
 
                         navigate('/success', { state: { teamId: receivedTeamId, teamName: teamName } });
 

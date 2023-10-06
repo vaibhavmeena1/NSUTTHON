@@ -16,10 +16,10 @@ export function NavigationBar() {
     return null; // or return a loading indicator, or keep your UI consistent while waiting.
   }
   return (
-    <div className="flex p-4 justify-between w-full   border-b border-gray-500">
+    <div className="flex p-4  justify-between w-full  border-b border-gray-500">
       {/* Left: NSUTTHON */}
       <Link to="/">
-        <div className="relative active:scale-95 hover:scale-95  cursor-grab z-20 pt-2 flex items-center   ">
+        <div className="relative active:scale-95 hover:scale-95 transition-all cursor-grab z-20 pt-2 flex items-center   ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -58,27 +58,10 @@ export function NavigationBar() {
       </div>
 
       {/* Right: Login, profile, Sign Up, ModeToggle, and SideMenu */}
-      {/* // Show Login button only if user is not logged in  */}
-      {/* Show Profile button only if user is logged in */}
+
       {/* Show Sign Up button only if user is not logged in */}
       <div className="flex space-x-4 items-center">
-        {/* {!user && (
-        <Link to="/login">
-          <Button variant="outline" className="w-full" type="button">
-            Login
-          </Button>
-        </Link>
-      )}
-
-      {user && (
-        <Link to="/profile">
-          <Button variant="outline" className="w-full" type="button">
-            Profile
-          </Button>
-        </Link>
-      )}
-
- */}
+    
         <Link to="/register">
           <Button
             variant="outline"
@@ -95,15 +78,7 @@ export function NavigationBar() {
           </div>
         )}
 
-        {/* 
-      {!user && (
-        <Link to="/signup" className="hidden sm:block">
-          <Button variant="outline" className="w-full" type="button">
-            Sign Up
-          </Button>
-        </Link>
-      )}
-       */}
+     
         <div className="hidden  space-x-4 items-center sm:flex">
           <ModeToggle />
         </div>
