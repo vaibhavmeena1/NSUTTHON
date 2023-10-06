@@ -107,11 +107,7 @@ function RegisterForm({ numberOfMembers, teamName }) {
                         navigate('/success', { state: { teamId: receivedTeamId, teamName: teamName } });
 
                         setShowPopup(false);
-                        toast({
-                            // variant: "positive",
-                            title: "Success!",
-                            description: "Registration successful!"
-                        });
+                        
                     } else {
                         toast({
                             variant: "destructive",
