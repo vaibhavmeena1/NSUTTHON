@@ -4,8 +4,6 @@ import times from "lodash.times";
 import LogoWhite from "./Logowhite";
 import { Button } from "../ui/button";
 import { useMarquee } from "@/components/auth/MarqueeContext";
-// import { ReactComponent as SVGlogoWhite} from  "../../../public/nsutthonw.svg";
-
 import { motion, AnimatePresence } from "framer-motion";
 
 const HeroSection = () => {
@@ -30,19 +28,7 @@ const HeroSection = () => {
     
 
 
-    // const [clicked, setClicked] = useState(false);
 
-    // const animationProps = useSpring({
-    //   opacity: clicked ? 0 : 1,
-    //   transform: clicked ? 'scale(2.5) translateY(-100vh)' : 'scale(1) translateY(0)',
-    // });
-  
-    // const handleRegisterClick = () => {
-    //   setClicked(true);
-    //   setTimeout(() => {
-    //     window.location.href = '/registration-page-url';
-    //   }, 500);
-    // };
     const handleRegisterClick = () => {
       // Start the animation
       setAnimateX(true);
@@ -146,7 +132,7 @@ const HeroSection = () => {
         <React.Fragment key={i}>
           <Marquee velocity={30}>
             {times(totalDisplayNames, Number).map((id) => (
-              <div key={`marquee-big-${id}-${i}`} className="pr-4 opacity-40">
+              <div key={`marquee-big-${id}-${i}`} className="pr-4 opacity-20">
                 <span
                   style={{
                     fontFamily: precomputedRandomFonts[id % names.length],
@@ -161,7 +147,7 @@ const HeroSection = () => {
 
           <Marquee velocity={45}>
             {times(totalDisplayNames, Number).map((id) => (
-              <div key={`marquee-small-${id}-${i}`} className="pr-4 opacity-40">
+              <div key={`marquee-small-${id}-${i}`} className="pr-4 opacity-20">
                 <span
                   style={{ fontFamily: getRandomFont() }}
                   className="text-3xl"
@@ -186,7 +172,7 @@ const HeroSection = () => {
         <React.Fragment key={i}>
           <Marquee velocity={7}>
             {times(totalDisplayNames, Number).map((id) => (
-              <div key={`marquee-big-${id}-${i}`} className="pr-4  opacity-50">
+              <div key={`marquee-big-${id}-${i}`} className="pr-4  opacity-20">
                 <span
                   style={{ fontFamily: getRandomFont() }}
                   className="text-base "
@@ -199,7 +185,7 @@ const HeroSection = () => {
 
           <Marquee velocity={10}>
             {times(totalDisplayNames, Number).map((id) => (
-              <div key={`marquee-small-${id}-${i}`} className="pr-4 opacity-50">
+              <div key={`marquee-small-${id}-${i}`} className="pr-4 opacity-20">
                 <span
                   style={{
                     fontFamily: precomputedRandomFonts[id % names.length],
@@ -235,7 +221,7 @@ const HeroSection = () => {
             variants={xVariants}
         >
             {/* <SVGlogoWhite className="opacity-95 w-80  origin-center z-30" /> */}
-              <LogoWhite className="opacity-95 w-80  origin-center z-30" />
+              <LogoWhite className=" w-80  origin-center z-30" />
         </motion.div>
     )}
 </AnimatePresence>

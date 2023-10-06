@@ -24,10 +24,10 @@ const Teamregister = () => {
                         TEAM SIZE
                     </h1>
 
-                    <div className='py-4  md:py-9   font-extrabold text-white dark:text-black'>
-                        <Button onClick={() => setTeamSize(3)} className={`transition-all rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 3 ? "" : "dark:bg-white bg-black  dark:text-black"}`}><span style={{ transform: "scaleX(1.9) scaleY(1)" }} className=" md:text-2xl font-bold font-akira"> 3 </span> </Button>
-                        <Button onClick={() => setTeamSize(4)} className={`transition-all rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 4 ? "" : "dark:bg-white bg-black dark:text-black"}`}><span style={{ transform: "scaleX(1.9) scaleY(1)" }} className=" md:text-2xl font-bold font-akira"> 4 </span></Button>
-                        <Button onClick={() => setTeamSize(5)} className={`transition-all rounded-full text-xl h-11 w-11 md:h-14 md:w-14 mr-2 md:mr-4 ${teamSize === 5 ? "" : "dark:bg-white bg-black dark:text-black"}`}><span style={{ transform: "scaleX(1.9) scaleY(1)" }} className=" md:text-2xl font-bold  font-akira"> 5 </span></Button>
+                    <div className='py-4  md:py-7   font-extrabold text-white dark:text-black'>
+                        <Button onClick={() => setTeamSize(3)} className={`transition-all rounded-full text-xl h-14 w-14 md:h-14 md:w-14 mr-3 md:mr-4 ${teamSize === 3 ? "" : "dark:bg-white bg-black  dark:text-black"}`}><span style={{ transform: "scaleX(1.9) scaleY(1)" }} className=" md:text-2xl font-bold font-akira"> 3 </span> </Button>
+                        <Button onClick={() => setTeamSize(4)} className={`transition-all rounded-full text-xl h-14 w-14 md:h-14 md:w-14 mr-3 md:mr-4 ${teamSize === 4 ? "" : "dark:bg-white bg-black dark:text-black"}`}><span style={{ transform: "scaleX(1.9) scaleY(1)" }} className=" md:text-2xl font-bold font-akira"> 4 </span></Button>
+                        <Button onClick={() => setTeamSize(5)} className={`transition-all rounded-full text-xl h-14 w-14 md:h-14 md:w-14 mr-3 md:mr-4 ${teamSize === 5 ? "" : "dark:bg-white bg-black dark:text-black"}`}><span style={{ transform: "scaleX(1.9) scaleY(1)" }} className=" md:text-2xl font-bold  font-akira"> 5 </span></Button>
                     </div>
                     <input required placeholder='TEAM NAME' value={teamName}  onChange={e => setTeamName(e.target.value.toUpperCase())} className='bg-transparent overflow-hidden cursor-text w-full text-5xl my-2 md:mb-4 outline-none md:text-7xl font-extrabold' />
                     <RegisterForm numberOfMembers={teamSize} teamName={teamName}  /> 
