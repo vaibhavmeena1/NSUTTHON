@@ -152,7 +152,7 @@ export function HomePage() {
         </footer>
       </section>
 
-      <section
+      {/* <section
         style={{ ...styles.section, height: `${vh}px` }}
         className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   |  w-full flex flex-col justify-center items-center "
       >
@@ -187,7 +187,7 @@ export function HomePage() {
             </a>
           </div>
         </footer>
-      </section>
+      </section> */}
 
       {/* <footer style={{ ...styles.section }}
  className="flex justify-center flex-col sm:justify-end text-xs text-gray-500  py-2 opacity-80 font-georgia">
