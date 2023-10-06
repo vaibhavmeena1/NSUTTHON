@@ -8,6 +8,8 @@ function SuccessPage() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const timer = setTimeout(() => {
       setShowLoader(false);
       setShowContent(true);
