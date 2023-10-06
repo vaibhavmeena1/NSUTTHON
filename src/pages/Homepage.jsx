@@ -55,7 +55,7 @@ export function HomePage() {
         
         className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   | py-6  w-full flex flex-col justify-center items-center "
       >
-        <div className=" flex-grow w-full flex flex-col justify-center items-center">
+        
           <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
             FAQs
           </h1>
@@ -72,8 +72,10 @@ export function HomePage() {
               <ChevronDown className="h-8 w-8 stroke-2" />
             </button>
           </div>
-        </div>
-        <footer className=" flex flex-col w-full  sm:justify-end  mb-4 text-right  text-xs text-gray-500 py-2 opacity-80 font-georgia">
+        
+       
+      </section>
+ <footer className=" flex flex-col w-full  sm:justify-end  mb-4 text-right  text-xs text-gray-500 py-2 opacity-80 font-georgia">
           <span className="text-right justify-end items-end hidden sm:flex">
             © 2023 NSUTTHON. Developed by&nbsp;
             <a
@@ -98,8 +100,6 @@ export function HomePage() {
             </a>
           </div>
         </footer>
-      </section>
-
       {/* <section
         style={{ ...styles.section, height: `${vh}px` }}
         className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   |  w-full flex flex-col justify-center items-center "
