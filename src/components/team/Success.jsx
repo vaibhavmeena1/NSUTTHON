@@ -33,26 +33,18 @@ function SuccessPage() {
   }
   // Now you can use teamId and teamName in your component's rendering logic
   // ...
-
-  return (
+return (
     <div>
       <div
-        className="grid lg:max-w-none lg:mr-14   lg:grid-cols-7 p-0 "
+        className="grid lg:max-w-none lg:mr-14 lg:grid-cols-7 p-0"
         style={{ height: "calc(100vh - 60px)" }}
       >
         <div className="relative hidden h-full flex-col p-10 lg:flex col-span-2">
           <div className="absolute inset-0 bg-zinc-900"></div>
         </div>
-        {showLoader && (
-        <div className="flex justify-center items-center gap-1.5 text-xl font-raleway col-span-5">
-          <BounceLoader color="#dc2628" speedMultiplier={1.2} size={25} />
-          Loading..
-        </div>
-      )}
-            {showContent && (
 
-        <div className="p-6  md:p-8 lg:pl-20 col-span-5">
-          <div className="  flex justify-center items-center">
+        <div className="p-6 md:p-8 lg:pl-20 col-span-5">
+          <div className="flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -69,60 +61,58 @@ function SuccessPage() {
                 className="dark:fill-[#e4eaf0]"
               />
             </svg>
-          </div>
+                    </div>
+
           <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
-            WELCOME{" "}
-            <span className="capitalize  bg-primary text-primary-foreground hover:bg-primary/90  ">
-              {teamName}
-            </span>
-            !
+            Dear Team Leader,
           </h1>
-          {/* <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
-           
-          </h1> */}
-          <h1 className="font-extrabold font-raleway tracking-tight text-3xl md:text-4xl">
-            Team ID: {teamId}
-          </h1>
+          <p className="mt-4">
+            Congratulations on successfully registering for NSUTthon! Your team ID is {teamId}.
+          </p>
 
           <p className="mt-4">
-            Congratulations! You are now eligible to participate in our events.
+            In order to complete the registration process, we ask that you complete the following steps:
           </p>
-
-          <p className="mt-2">
-            For a list of all the exciting events,{" "}
-            <a href="/events">click here</a>. If you have questions or need
-            assistance, feel free to{" "}
-            <a href="https://www.instagram.com/crosslinks.nsut">contact us</a>.
-          </p>
-
-          <p className="mt-2 font-semibold">
-            Important: To verify your team registration, please complete the
-            mandatory sponsor task:
-          </p>
-
-          <ul className="list-disc pl-5 mt-2">
+          <ol className="list-decimal pl-5 mt-2">
             <li>
-              <a href={appLink}>{appLabel}</a>.
+              Install the app using the link provided in the Google form.
             </li>
-            <li>Register your account within the app.</li>
+            <li>Register on the app.</li>
             <li>
-              Follow any additional instructions provided in the app to ensure
-              your team's successful verification.
+              Complete the free aptitude test and share the screenshot via the Google form link.
             </li>
-          </ul>
+          </ol>
 
           <p className="mt-4">
-            Completing this task not only verifies your team but also supports
-            our events and ensures we can continue providing great experiences
-            for all participants.
+            As the team captain, it is your responsibility to ensure that all members of your team have been registered and have completed the quiz and to submit a screenshot of each member's registration on the Google form.
           </p>
-
-          <p className="mt-4">Thank you for being a part of our community!</p>
+          <p className="mt-4">
+            The form requires a screenshot that clearly displays the quiz score of each member.
+          </p>
+          <p className="mt-4">
+            Please be aware that the app is exclusive to Android users. In case you own an I-phone, we recommend registering via the device of a family member or a friend. Your answers to these questions are irrelevant; only completing the quiz is necessary.
+          </p>
+          <p className="mt-4">
+            Multiple entries from the same device are prohibited. Additionally, remember to use a personal ID and not the college one.
+          </p>
+          <p className="mt-4 font-semibold">
+            Failure to complete these steps by any of the members will lead to disqualification of the entire team.
+          </p>
+          <p className="mt-4">
+            If you have any questions or concerns, please feel free to reach out to us. A link to our Whatsapp group is attached herewith:
+            <a href="https://chat.whatsapp.com/HXhwYaYZoIT0g35UqciwMS" target="_blank" rel="noopener noreferrer"> Whatsapp Group</a>
+          </p>
+          <p className="mt-4">
+            Google form: <a href="https://forms.gle/jZ1ApAk9VRQqwmc99" target="_blank" rel="noopener noreferrer">https://forms.gle/jZ1ApAk9VRQqwmc99</a>
+          </p>
+          <p className="mt-4">
+            Best regards, <br />
+            Team Crosslinks
+          </p>
         </div>
-        )}
       </div>
     </div>
-  );
+);
 }
 
 export default SuccessPage;
