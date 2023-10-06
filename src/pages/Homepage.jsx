@@ -7,8 +7,8 @@ import HeroSection from "@/components/Homepage/HeroScrollingText";
 import { Label } from "@/components/ui/label";
 export function HomePage() {
   const [showAllFaqs, setShowAllFaqs] = useState(false);
-  const navbarHeight = 56; // Height of your navbar in pixels
-  const [vh, setVh] = useState(window.innerHeight - navbarHeight);
+  // const navbarHeight = 56; // Height of your navbar in pixels
+//  const [vh, setVh] = useState(window.innerHeight - navbarHeight);
 
 //  useEffect(() => {
 //    const handleResize = () => setVh(window.innerHeight - navbarHeight);
@@ -18,58 +18,6 @@ export function HomePage() {
    // };
   // }, []);
 
-  useEffect(() => {
-    const snapContainer = document.querySelector(".snap-container");
-
-    if (!snapContainer) {
-      console.error("snapContainer is null");
-      return;
-    }
-
-    let timeoutId = null;
-    const onScroll = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        const currentScroll = snapContainer.scrollTop;
-        const snapHeight = window.innerHeight;
-        const snapIndex = Math.round(currentScroll / snapHeight);
-        const targetScroll = snapIndex * snapHeight;
-
-        const animateScroll = (
-          startTime,
-          currentTime,
-          startScroll,
-          endScroll
-        ) => {
-          const runtime = currentTime - startTime;
-          const progress = Math.min(runtime / 1000, 1);
-          const ease =
-            progress < 0.5
-              ? 2 * progress * progress
-              : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-          snapContainer.scrollTop =
-            startScroll + (endScroll - startScroll) * ease;
-
-          if (runtime < 1000) {
-            requestAnimationFrame((timestamp) =>
-              animateScroll(startTime, timestamp, startScroll, endScroll)
-            );
-          }
-        };
-
-        requestAnimationFrame((timestamp) =>
-          animateScroll(timestamp, timestamp, currentScroll, targetScroll)
-        );
-      }, 500);
-    };
-
-    // snapContainer.addEventListener("scroll", onScroll);
-
-    return () => {
-      snapContainer.removeEventListener("scroll", onScroll);
-    };
-  }, []);
 
   const styles = {
     // snapContainer: {
