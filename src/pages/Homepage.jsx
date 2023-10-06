@@ -64,7 +64,7 @@ export function HomePage() {
       }, 500);
     };
 
-    snapContainer.addEventListener("scroll", onScroll);
+    // snapContainer.addEventListener("scroll", onScroll);
 
     return () => {
       snapContainer.removeEventListener("scroll", onScroll);
@@ -72,14 +72,14 @@ export function HomePage() {
   }, []);
 
   const styles = {
-    snapContainer: {
-      height: `${vh}px`,
-      overflowY: "scroll",
-      scrollSnapType: "y mandatory",
-    },
-    section: {
-      scrollSnapAlign: "start",
-    },
+    // snapContainer: {
+    //   height: `${vh}px`,
+    //   overflowY: "scroll",
+    //   scrollSnapType: "y mandatory",
+    // },
+    // section: {
+    //   scrollSnapAlign: "start",
+    // },
   };
 
   return (
