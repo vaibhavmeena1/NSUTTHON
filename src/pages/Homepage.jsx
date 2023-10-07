@@ -58,6 +58,30 @@ export function HomePage() {
         <Events/>
          
       </section>
+      <section
+        
+        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   | py-6 md:py-16 w-full  "
+      >
+        
+          <h1 className="font-extrabold font-raleway text-center pt-16 p-4 tracking-tight text-2xl md:text-4xl">
+            FAQs
+          </h1>
+          <div className="w-full">
+            <Faq showAll={showAllFaqs} />
+          </div>
+          <div className="text-center -mt-7 relative">
+            <button
+              className={`transform transition-transform duration-300 p-2 rounded-full ${
+                showAllFaqs ? "rotate-180" : ""
+              } dark:bg-[hsl(0,0%,14.9%)] bg-[hsl(0,0%,89.9%)]`}
+              onClick={() => setShowAllFaqs(!showAllFaqs)}
+            >
+              <ChevronDown className="h-8 w-8 stroke-2" />
+            </button>
+          </div>
+        
+       
+      </section>
  <footer className="flex justify-center flex-col sm:justify-end text-xs text-gray-500  py-2 opacity-80 font-georgia">
     <span className=" text-right hidden sm:block">
         © 2023 NSUTTHON. Developed by <a href="https://www.linkedin.com/in/vaibhavmeena1/" target="_blank" rel="noopener noreferrer">Vaibhav Meena</a>.
