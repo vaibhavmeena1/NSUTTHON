@@ -28,7 +28,7 @@ export function Faq({ showAll }) {
       },
       {
         id: "item-3",
-        question: "What is the schedule of events and when will it be released?",
+        question: "What is the schedule of events?",
         answer:
           "The schedule of the events will be released on the official Instagram handle of CROSSLINKS, NSUT a few days before the event. You are requested to follow our social media handles for all updates."
       },
@@ -58,7 +58,7 @@ export function Faq({ showAll }) {
       },
       {
         id: "item-8",
-        question: "How to get a team registered for participation in NSUTTHON?",
+        question: "How to get a team registered for NSUTTHON?",
         answer:
           "For participating in NSUTTHON you need to register your team by proceeding with the following steps:<br/>" +
           "1)Visit the website of NSUTTHON.<br/>" +
@@ -75,7 +75,7 @@ export function Faq({ showAll }) {
       },
       {
         id: "item-9",
-        question: "Is it necessary to register our team to take part in any event?",
+        question: "Is it necessary to register our team?",
         answer:
           "Yes, it is mandatory to register your team on NSUTTHON's website to take part in any society's event."
       },
@@ -91,7 +91,7 @@ export function Faq({ showAll }) {
       },
       {
         id: "item-11",
-        question: "What to do if two events I desire to participate in clash?",
+        question: "What to do if two events clash?",
         answer:
           "Well, you have to make a choice here by participating in the event you wish to be a part of more eagerly and let your team join the other one.<br/>" +
           "<strong>Pro Tip:</strong> Make a team of 5 members so that your chances of scoring points increases as your team can participate in two or more events at the same time."
