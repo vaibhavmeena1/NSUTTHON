@@ -143,7 +143,7 @@ export function Faq({ showAll }) {
         {allFaqs.map((faq, index) => (
           <AccordionItem
             value={faq.id}
-            className={showAll || index < ? shownClass : hiddenClass}
+            className={showAll || index < 8 ? shownClass : hiddenClass}
             key={faq.id}
           >
             <AccordionTrigger>{faq.question}</AccordionTrigger>
