@@ -82,7 +82,7 @@ export function HomePage() {
         
        
       </section>
- <footer className="flex justify-center flex-col sm:justify-end text-xs text-gray-500  py-2 opacity-80 font-georgia">
+ <footer className="flex justify-center flex-col sm:justify-end text-xs text-gray-500  pb-2 pt-6 opacity-80 font-georgia">
     <span className=" text-right hidden sm:block">
         © 2023 NSUTTHON. Developed by <a href="https://www.linkedin.com/in/vaibhavmeena1/" target="_blank" rel="noopener noreferrer">Vaibhav Meena</a>.
     </span>
