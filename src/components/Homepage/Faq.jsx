@@ -11,10 +11,7 @@ import clsx from "clsx";
 import { useInView } from "react-intersection-observer";
 
 export function Faq({ showAll }) {
-  const { ref, inView } = useInView({
-    triggerOnce: false, // Ensures the animation happens only once
-    threshold: 0.6, // Percentage of element in view to trigger
-  });
+  
   const allFaqs = useCallback(
     [
       {
@@ -139,14 +136,14 @@ export function Faq({ showAll }) {
 
   return (
     <div
-    ref={ref} // Attach the ref here
+    
       className={`${containerClass} relative pb-3 border-b-4 overflow-hidden`}
     >
       <Accordion type="single" collapsible className="w-full">
         {allFaqs.map((faq, index) => (
           <AccordionItem
             value={faq.id}
-            className={inView ? (showAll || index < 5 ? shownClass : hiddenClass) : hiddenClass}
+            className={showAll || index < 5 ? shownClass : hiddenClass}
             key={faq.id}
           >
             <AccordionTrigger>{faq.question}</AccordionTrigger>
