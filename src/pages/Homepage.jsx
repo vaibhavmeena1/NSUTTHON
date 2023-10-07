@@ -5,6 +5,7 @@ import { Faq } from "@/components/Homepage/Faq";
 import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/Homepage/HeroScrollingText";
 import { Label } from "@/components/ui/label";
+import { Events } from "./events";
 export function HomePage() {
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   // const navbarHeight = 56; // Height of your navbar in pixels
