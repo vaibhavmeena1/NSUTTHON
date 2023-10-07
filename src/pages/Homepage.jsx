@@ -63,7 +63,7 @@ export function HomePage() {
         className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   | pb-6 md:pb-16 w-full  "
       >
         
-          <h1 class="font-extrabold font-raleway text-center pt-4 p-4 tracking-tight text-2xl md:text-4xl lower">
+          <h1 className="font-extrabold font-raleway text-center pt-4 p-4 tracking-tight text-2xl md:text-4xl lower">
             FAQs
           </h1>
           <div className="w-full">
