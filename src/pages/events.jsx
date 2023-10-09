@@ -101,15 +101,8 @@ export const Events = () => {
       </ul>
 
       <div className="pt-4 h-[60vh]  md:pt-8">
-        <div className="flex  flex-col  h-[60vh]   justify-center items-center">
-        <CalendarDays className="h-24 w-24 mb-3"/>
-        <span className="text-2xl  font-raleway">Events Coming Soon!</span>
-        {/* Stay tuned for upcoming events! */}
-        <span className="text-sm  font-raleway">Stay tuned for upcoming events!</span>
-
-
-        </div>
-        {/* <EventGrid openTab={openTab} /> */}
+       
+      <EventGrid openTab={openTab} />
       </div>
     </div>
   );
