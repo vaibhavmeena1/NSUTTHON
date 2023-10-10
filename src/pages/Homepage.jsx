@@ -53,7 +53,7 @@ export function HomePage() {
       </section>
  <section
         
-        className="w-full md:overflow-visible overflow-auto"
+        className="w-full overflow-visible md:overflow-visible overflow-auto"
       >
         <Events/>
          
