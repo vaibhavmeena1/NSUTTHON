@@ -53,7 +53,7 @@ export function HomePage() {
       </section>
  <section
         
-        className="  min-h-screen w-full   "
+        className="min-h-screen w-full overflow-hidden"
       >
         <Events/>
          
