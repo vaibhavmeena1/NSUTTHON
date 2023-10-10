@@ -53,7 +53,7 @@ export function HomePage() {
       </section>
  <section
         
-        className="w-full overflow-auto"
+        className="w-full overflow-scroll"
       >
         <Events/>
          
