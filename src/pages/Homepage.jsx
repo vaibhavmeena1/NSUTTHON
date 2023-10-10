@@ -53,17 +53,17 @@ export function HomePage() {
       </section>
  <section
         
-        className="w-full overflow-visible"
+        className="w-full overflow-visible h[100]"
       >
         <Events/>
          
       </section>
       <section
         
-        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   | pb-6 md:pb-16 w-full  "
+        className="md:px-16  lg:px-[10vw] xl:px-[12vw] px-[6vw]   | pb-6 md:pb-16 w-full hidden "
       >
         
-          <h1 className="font-extrabold font-raleway text-center pt-4 p-4 tracking-tight text-2xl md:text-4xl lower">
+          <h1 className="font-extrabold font-raleway text-center pt-4 p-4 tracking-tight text-2xl md:text-4xl lower ">
             FAQs
           </h1>
           <div className="w-full">
