@@ -8,7 +8,7 @@ Welcome to the official repository for NSUTTHON: Crosslinks, NSUT's flagship eve
 The website serves as the central hub for all event-related activities, including team registrations, event details, and the leaderboard. Participants can fill out initial forms to register their teams, providing details like team name and team members.
 
 ## 📅 Events and Schedule
-![Events Page](https://i.ibb.co/ngGdqyw/image.png)
+![Events Page](https://i.ibb.co/VLny1XT/image.png)
 
 Find all the necessary information about the various events, their schedules, and venues right here. Dive into the details to plan your days and make the most out of this incredible experience.
 
