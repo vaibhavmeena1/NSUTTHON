@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from "@/components/ui/button"
 import RegisterForm from "@/components/team/RegisterModal"
+import LogoWhite from '../components/Homepage/Logowhite';
 
 const Teamregister = () => {
     const [teamSize, setTeamSize] = React.useState(3);
@@ -14,9 +15,10 @@ const Teamregister = () => {
     return (
         <>
             <div className="grid lg:max-w-none lg:mr-14   lg:grid-cols-7 p-0 " style={{ height: 'calc(100vh - 60px)' }}>
-
                 <div className="relative hidden h-full flex-col p-10 lg:flex col-span-2">
-                    <div className="absolute inset-0 bg-zinc-900"></div>
+                    <div className="absolute inset-0 bg-zinc-900 overflow-hidden">
+                        <LogoWhite className="w-full h-full origin-center translate-x-60 scale-[1.75]" />
+                    </div>
                 </div>
 
                 <div className="p-6 md:p-8   lg:pl-20   col-span-5">
@@ -31,11 +33,6 @@ const Teamregister = () => {
                     </div>
                     <input required placeholder='TEAM NAME' value={teamName}  onChange={e => setTeamName(e.target.value.toUpperCase())} className='bg-transparent overflow-hidden cursor-text w-full text-5xl my-2 md:mb-4 outline-none md:text-7xl font-extrabold' />
                     <RegisterForm numberOfMembers={teamSize} teamName={teamName}  /> 
-
-
-
-
-
                 </div>
             </div>
 
